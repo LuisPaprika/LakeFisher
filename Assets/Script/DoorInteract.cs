@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 
-public class DoorInteract : MonoBehaviour, IInteractable
+public class DoorInteract : InteractableBase
 {
+    [Header("Animator")]
     [SerializeField] Animator doorAnimator;
     private bool interacted = false;
-    public void Interact()
+    public override void Interact()
     {
         interacted = !interacted;
         if (interacted)
@@ -15,6 +17,7 @@ public class DoorInteract : MonoBehaviour, IInteractable
         {
             doorAnimator.SetTrigger("CloseDoor");
         }
-            
+
     }
+
 }

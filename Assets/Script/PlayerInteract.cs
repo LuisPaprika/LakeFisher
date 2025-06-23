@@ -1,8 +1,10 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
+    [SerializeField] GameObject UI;
     private InputSystem_Actions inputActions;
     void Awake()
     {
@@ -14,13 +16,16 @@ public class PlayerInteract : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 100f))
         {
-            if (inputActions.Player.Interact.WasPerformedThisFrame())
+            if (hit.collider.TryGetComponent<InteractableBase>(out InteractableBase interactObj))
             {
-                if (hit.collider.TryGetComponent<IInteractable>(out IInteractable interactObj))
+                interactObj.Hovered();
+
+                if (inputActions.Player.Interact.WasPerformedThisFrame())
                 {
                     interactObj.Interact();
                 }
             }
+
         }
     }
 }
