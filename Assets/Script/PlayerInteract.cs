@@ -1,16 +1,28 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private InputSystem_Actions inputActions;
+    void Awake()
     {
-        
+        inputActions = new InputSystem_Actions();
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnEnable()
     {
-        
+        inputActions.Player.Enable();
+        inputActions.Player.Attack.performed += ctx => Debug.Log("Attack");
+    }
+
+    void OnDisable()
+    {
+        inputActions.Player.Disable();
+        inputActions.Player.Interact.performed -= OnInteract;
+    }
+
+    private void OnInteract(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Interacted");
     }
 }
