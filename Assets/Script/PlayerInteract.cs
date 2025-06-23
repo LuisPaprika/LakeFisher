@@ -12,17 +12,23 @@ public class PlayerInteract : MonoBehaviour
     void OnEnable()
     {
         inputActions.Player.Enable();
-        inputActions.Player.Interact.performed += ctx => Debug.Log("Interact");
+        inputActions.Player.Interact.performed += OnPlayerInteract;
     }
 
     void OnDisable()
     {
         inputActions.Player.Disable();
-        inputActions.Player.Interact.performed -= OnInteract;
+        inputActions.Player.Interact.performed -= OnPlayerInteract;
     }
 
-    private void OnInteract(InputAction.CallbackContext ctx)
+    private void OnPlayerInteract(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Interacted");
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 100f))
+        {
+            if (hit.collider.TryGetComponent<IInteractable>(out IInteractable interactObj))
+            {
+                interactObj.Interact();
+            }
+        }
     }
 }
