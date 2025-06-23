@@ -1346,6 +1346,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1727859991}
   - component: {fileID: 1727859992}
+  - component: {fileID: 1727859994}
+  - component: {fileID: 1727859993}
   m_Layer: 0
   m_Name: DoorPivot
   m_TagString: Untagged
@@ -1369,7 +1371,41 @@ Transform:
   - {fileID: 7272638916666914149}
   m_Father: {fileID: 543450652910859297}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1727859992
+--- !u!65 &1727859992
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727859990}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.96199036, y: 3.919674, z: 1.7689209}
+  m_Center: {x: -0.019004822, y: 0.04310608, z: -0.78780746}
+--- !u!114 &1727859993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727859990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81ed3bf11e2b574088818b622283a81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorAnimator: {fileID: 1727859994}
+--- !u!95 &1727859994
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -1669,7 +1705,6 @@ GameObject:
   - component: {fileID: 8103695659145454507}
   - component: {fileID: 8918280150882734358}
   - component: {fileID: 8918280150882734359}
-  - component: {fileID: 8918280150882734360}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -2595,18 +2630,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.80620325, y: 1.906378, z: 4.2945876}
   m_Center: {x: 0, y: -0.000000029802319, z: 0.0000011920929}
---- !u!114 &8918280150882734360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1155298510956593447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c81ed3bf11e2b574088818b622283a81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
