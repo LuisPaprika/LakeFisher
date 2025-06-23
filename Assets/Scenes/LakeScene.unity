@@ -4368,6 +4368,7 @@ GameObject:
   - component: {fileID: 762840993615729281}
   - component: {fileID: 890662377}
   - component: {fileID: 7948747657239190497}
+  - component: {fileID: 7948747657239190498}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -4389,6 +4390,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShownPrompt: Go Back
   sceneName: CabinScene
+--- !u!65 &7948747657239190498
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7948747657239190496}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.1306517, y: 2.4, z: 1.1832759}
+  m_Center: {x: -0.26583242, y: -0.0000076293945, z: -0.012254892}
 --- !u!33 &7969300467162110287
 MeshFilter:
   m_ObjectHideFlags: 0
