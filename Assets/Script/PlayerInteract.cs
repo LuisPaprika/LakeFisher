@@ -4,16 +4,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
+    [SerializeField] float InteractRange = 2.5f;
+    private Camera playerCamera;
     private InputSystem_Actions inputActions;
     void Awake()
     {
+        playerCamera = gameObject.GetComponentInChildren<Camera>();
+
         inputActions = new InputSystem_Actions();
         inputActions.Enable();
     }
 
     void Update()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 200f))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, InteractRange))
         {
             if (hit.collider.TryGetComponent<InteractableBase>(out InteractableBase interactObj))
             {
