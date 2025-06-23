@@ -12,7 +12,7 @@ public class PlayerInteract : MonoBehaviour
     void OnEnable()
     {
         inputActions.Player.Enable();
-        inputActions.Player.Attack.performed += ctx => Debug.Log("Attack");
+        inputActions.Player.Interact.performed += ctx => Debug.Log("Interact");
     }
 
     void OnDisable()
