@@ -998,6 +998,7 @@ GameObject:
   - component: {fileID: 415470246}
   - component: {fileID: 415470245}
   - component: {fileID: 415470244}
+  - component: {fileID: 415470248}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -1089,6 +1090,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &415470248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415470243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0613e9e9e8843c34fab26339761ba1ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &575699463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1442,7 +1455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0450b9193b579a84abc39cb6c78b8d81, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.658554
+      value: -0.70500183
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0450b9193b579a84abc39cb6c78b8d81, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1843,7 +1856,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0450b9193b579a84abc39cb6c78b8d81, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.115555
+      value: -0.2480011
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0450b9193b579a84abc39cb6c78b8d81, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1912,7 +1925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ed77884086a3ebf43b6bc2e4bdb9805f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.8715515
+      value: -0.4920044
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ed77884086a3ebf43b6bc2e4bdb9805f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2090,7 +2103,7 @@ Transform:
   m_GameObject: {fileID: 919132147820739516}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.8366815, z: -0, w: 0.54768986}
-  m_LocalPosition: {x: 9.993561, y: -3.006339, z: 13.211052}
+  m_LocalPosition: {x: -0.37, y: -3.006339, z: 13.211052}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2239,8 +2252,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450651822088454}
-  - component: {fileID: 919132147820739518}
-  - component: {fileID: 919132147820739517}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -2248,41 +2259,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &919132147820739517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132147820739516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d39bbd1bbc51be42b55ce33a4ffb90f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShownPrompt: Go Fishing
---- !u!64 &919132147820739518
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132147820739516}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &919132147995384392
 GameObject:
   m_ObjectHideFlags: 0
@@ -4226,6 +4202,7 @@ GameObject:
   - component: {fileID: 2066716038704485383}
   - component: {fileID: 762840993615729281}
   - component: {fileID: 890662377}
+  - component: {fileID: 7948747657239190497}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -4233,6 +4210,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7948747657239190497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7948747657239190496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d39bbd1bbc51be42b55ce33a4ffb90f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShownPrompt: Go Fishing
+  sceneName: LakeScene
 --- !u!33 &7969300467162110287
 MeshFilter:
   m_ObjectHideFlags: 0

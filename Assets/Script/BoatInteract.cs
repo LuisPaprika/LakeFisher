@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BoatInteract : InteractableBase
 {
+    [Header("Target Scene Name")]
+    [SerializeField] string sceneName;
     public override void Interact()
     {
-        Debug.Log("Boat Interacted");
+        SceneManager.LoadScene(sceneName);
     }
 }

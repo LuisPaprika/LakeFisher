@@ -15,6 +15,11 @@ public class PlayerInteract : MonoBehaviour
         inputActions.Enable();
     }
 
+    void OnDestroy()
+    {
+        inputActions.Disable();
+    }
+
     void Update()
     {
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, InteractRange))
