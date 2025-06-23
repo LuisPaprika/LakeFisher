@@ -18,7 +18,7 @@ public class PlayerControl : MonoBehaviour
 
     [Header("Camera Look")]
     public float lookSpeed = 2.0f;
-    public float lookXLimit = 60.0f;
+    public float lookXLimit = 90.0f;
 
     [Header("Physics")]
     public float gravity = -15.0f;

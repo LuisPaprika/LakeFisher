@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
-    [SerializeField] GameObject UI;
     private InputSystem_Actions inputActions;
     void Awake()
     {
@@ -14,7 +13,7 @@ public class PlayerInteract : MonoBehaviour
 
     void Update()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 100f))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 200f))
         {
             if (hit.collider.TryGetComponent<InteractableBase>(out InteractableBase interactObj))
             {
