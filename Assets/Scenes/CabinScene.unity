@@ -985,7 +985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d313005ea437a64bad4726aa8386f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractRange: 100
+  InteractRange: 2.5
 --- !u!1 &415470243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1599,8 +1599,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.1344757, y: 1.9451427, z: 0.34219742}
+  m_Center: {x: 0.094062805, y: 2.8487043, z: 2.9101238}
 --- !u!1 &1267376163
 GameObject:
   m_ObjectHideFlags: 0
@@ -2361,6 +2361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShownPrompt: Open/Close Drawer
+  DrawerAnimator: {fileID: 8573926660342298870}
 --- !u!1 &919132149523302504
 GameObject:
   m_ObjectHideFlags: 0
@@ -2407,12 +2408,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.7120206, y: 12.186638, z: 3.0943606}
-  m_Center: {x: 0.071195096, y: 3.3364785, z: -0.11800555}
+  m_Size: {x: 2.7120206, y: 9.484437, z: 3.0943606}
+  m_Center: {x: 0.071195096, y: 4.6875777, z: -0.11800555}
 --- !u!23 &1025270416945552117
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3722,6 +3723,7 @@ GameObject:
   - component: {fileID: 5667952125876430512}
   - component: {fileID: 7459215578811734646}
   - component: {fileID: 8573926660342298869}
+  - component: {fileID: 8573926660342298870}
   m_Layer: 0
   m_Name: Top Drawer
   m_TagString: Untagged
@@ -4413,6 +4415,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &8573926660342298870
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6051805808357589522}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 259b0b5f6e0ef4f46924bddf55035087, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!23 &8918280150882734358
 MeshRenderer:
   m_ObjectHideFlags: 0
