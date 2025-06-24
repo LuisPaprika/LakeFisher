@@ -85,7 +85,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": ""Next"",
                     ""type"": ""Button"",
                     ""id"": ""b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -1001,6 +1001,34 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Conversation"",
+            ""id"": ""e69b196e-16cb-421e-94cf-75796d8b3cff"",
+            ""actions"": [
+                {
+                    ""name"": ""Next Dialouge"",
+                    ""type"": ""Button"",
+                    ""id"": ""c8c9221b-c068-4f41-a28f-2d4636e7b9ed"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""77a61642-e5b3-4429-bdf6-e8d686cda086"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Next Dialouge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1089,12 +1117,16 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // Conversation
+        m_Conversation = asset.FindActionMap("Conversation", throwIfNotFound: true);
+        m_Conversation_NextDialouge = m_Conversation.FindAction("Next Dialouge", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Conversation.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Conversation.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -1380,6 +1412,52 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Conversation
+    private readonly InputActionMap m_Conversation;
+    private List<IConversationActions> m_ConversationActionsCallbackInterfaces = new List<IConversationActions>();
+    private readonly InputAction m_Conversation_NextDialouge;
+    public struct ConversationActions
+    {
+        private @InputSystem_Actions m_Wrapper;
+        public ConversationActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @NextDialouge => m_Wrapper.m_Conversation_NextDialouge;
+        public InputActionMap Get() { return m_Wrapper.m_Conversation; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ConversationActions set) { return set.Get(); }
+        public void AddCallbacks(IConversationActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ConversationActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ConversationActionsCallbackInterfaces.Add(instance);
+            @NextDialouge.started += instance.OnNextDialouge;
+            @NextDialouge.performed += instance.OnNextDialouge;
+            @NextDialouge.canceled += instance.OnNextDialouge;
+        }
+
+        private void UnregisterCallbacks(IConversationActions instance)
+        {
+            @NextDialouge.started -= instance.OnNextDialouge;
+            @NextDialouge.performed -= instance.OnNextDialouge;
+            @NextDialouge.canceled -= instance.OnNextDialouge;
+        }
+
+        public void RemoveCallbacks(IConversationActions instance)
+        {
+            if (m_Wrapper.m_ConversationActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IConversationActions instance)
+        {
+            foreach (var item in m_Wrapper.m_ConversationActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_ConversationActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public ConversationActions @Conversation => new ConversationActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1449,5 +1527,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnScrollWheel(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IConversationActions
+    {
+        void OnNextDialouge(InputAction.CallbackContext context);
     }
 }
