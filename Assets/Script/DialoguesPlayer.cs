@@ -5,8 +5,7 @@ using UnityEngine.UIElements;
 
 public class DialoguesPlayer : MonoBehaviour
 {
-
-    //Attach this to Empty Object
+    //Attach this to UI (Canvas)
     [SerializeField] GameObject textBoxBG;
     private InputSystem_Actions inputActions;
     private TMP_Text textBox;
