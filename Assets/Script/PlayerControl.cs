@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements.InputSystem;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class PlayerControl : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 lookInput;
 
+    public static bool EnableInput = true;
+
     /*
     ------------------------------------------------------
     ฟังก์ชันของ Unity ที่ทำงานตอนเริ่มต้น
@@ -56,12 +59,16 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-        HandleGrounded();
-        HandleMovement();
-        HandleGravity();
-        HandleCameraLook();
+        if (EnableInput)
+        {
+            HandleGrounded();
+            HandleMovement();
+            HandleGravity();
+            HandleCameraLook();
+        }
+
     }
-    
+
     /*
     ------------------------------------------------------
     ฟังก์ชันที่ถูกเรียกโดย PlayerInput (Send Messages)
