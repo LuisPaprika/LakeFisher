@@ -17,6 +17,6 @@ public class PersonInteract : InteractableBase
     {
         Vector3 direction = gameObject.transform.position - PlayerControl.PlayerCamera.position;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        PlayerControl.PlayerCamera.rotation = Quaternion.Lerp(PlayerControl.PlayerCamera.rotation, targetRotation, Time.deltaTime * smoothSpeed);
+        PlayerControl.PlayerCamera.rotation = Quaternion.Lerp(PlayerControl.PlayerCamera.rotation, targetRotation, Time.deltaTime * smoothSpeed); //Slowly turning camera
     }
 }
