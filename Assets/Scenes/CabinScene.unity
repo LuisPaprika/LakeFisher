@@ -4493,6 +4493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShownPrompt: Go Fishing
   sceneName: LakeScene
+  newActionMapName: Player
 --- !u!65 &7948747657239190498
 BoxCollider:
   m_ObjectHideFlags: 0

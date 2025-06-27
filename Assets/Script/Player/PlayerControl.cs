@@ -1,18 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements.InputSystem;
 
 public class PlayerControl : MonoBehaviour
 {
-    /*
-    ------------------------------------------------------
-    ตัวแปรสำหรับปรับแต่งค่าต่างๆ
-    -------------------------------------------------------
-    */
-
     [Header("Components")]
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Transform playerCameraTransform;
+    public static Transform PlayerCamera;
 
     [Header("Player Movement")]
     public float moveSpeed = 7.5f;
@@ -24,12 +18,6 @@ public class PlayerControl : MonoBehaviour
     [Header("Physics")]
     public float gravity = -15.0f;
 
-    /*
-    ------------------------------------------------------
-    ตัวแปรที่ใช้ภายในสคริปต์
-    -------------------------------------------------------
-    */
-
     private Vector3 playerVelocity;
     private bool isGrounded;
     private float rotationX = 0;
@@ -39,16 +27,12 @@ public class PlayerControl : MonoBehaviour
 
     public static bool EnableInput = true;
 
-    /*
-    ------------------------------------------------------
-    ฟังก์ชันของ Unity ที่ทำงานตอนเริ่มต้น
-    -------------------------------------------------------
-    */
-
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        PlayerCamera = playerCameraTransform;
     }
 
     void Update()
@@ -69,12 +53,6 @@ public class PlayerControl : MonoBehaviour
 
     }
 
-    /*
-    ------------------------------------------------------
-    ฟังก์ชันที่ถูกเรียกโดย PlayerInput (Send Messages)
-    -------------------------------------------------------
-    */
-
     public void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
@@ -84,12 +62,6 @@ public class PlayerControl : MonoBehaviour
     {
         lookInput = value.Get<Vector2>();
     }
-
-    /*
-    ------------------------------------------------------
-    ฟังก์ชันจัดการการทำงานส่วนต่างๆ (ใช้ค่าจาก Input System)
-    -------------------------------------------------------
-    */
 
     private void HandleGrounded()
     {
