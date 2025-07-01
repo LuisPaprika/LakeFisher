@@ -19,7 +19,7 @@ public class PlayerInteract : MonoBehaviour
             {
                 interactObj.Hovered();
 
-                if (PlayerControl.inputActions.Player.Interact.WasPerformedThisFrame())
+                if (PlayerControl.inputActions.FindAction("Interact").WasPerformedThisFrame())
                 {
                     interactObj.Interact();
                 }

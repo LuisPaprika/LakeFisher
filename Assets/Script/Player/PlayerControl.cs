@@ -25,18 +25,19 @@ public class PlayerControl : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 lookInput;
     public static InputSystem_Actions inputActions;
+    [SerializeField] string startActionMap = "Player";
 
     void Awake()
     {
         inputActions = new InputSystem_Actions();
-        SetActionMapByName("Player");
+        SetActionMapByName(startActionMap);
     }
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
+
         PlayerCamera = playerCameraTransform;
     }
 
@@ -48,16 +49,25 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-
         if (inputActions.Player.enabled)
         {
             HandleGrounded();
             HandleMovement();
             HandleGravity();
+        }
+
+        if (!inputActions.Conversation.enabled)
+        {
             HandleCameraLook();
         }
 
 
+
+    }
+
+    void OnDestroy()
+    {
+        inputActions.Disable();
     }
 
     public static void SetActionMapByName(string ActionMapName)
@@ -65,7 +75,6 @@ public class PlayerControl : MonoBehaviour
         inputActions.Disable();
         var actionMap = inputActions.asset.FindActionMap(ActionMapName);
         actionMap.Enable();
-        Debug.Log("Set map to " + ActionMapName);
     }
 
     public void OnMove(InputValue value)
