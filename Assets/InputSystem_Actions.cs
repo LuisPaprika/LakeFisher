@@ -1035,18 +1035,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             ""id"": ""15bdec6f-e3ac-46bb-8eec-d3242313dfb3"",
             ""actions"": [
                 {
-                    ""name"": ""Look"",
-                    ""type"": ""Value"",
-                    ""id"": ""3a82f1da-e42b-4437-95b6-6edda09fde84"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Interact"",
+                    ""name"": ""Fishing"",
                     ""type"": ""Button"",
-                    ""id"": ""c150cfd4-a7a5-4922-afdd-022bb50e1d7f"",
+                    ""id"": ""f8cf8503-655a-4b15-9c6c-3ed0358d84bb"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1056,45 +1047,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""c6d69e92-6b0b-409e-9362-934451749124"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""id"": ""c7bb3311-c56a-440a-827f-a77160800df3"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f26cd825-b4a5-404e-b9fa-45e5673f11dc"",
-                    ""path"": ""<Pointer>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse;Touch"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c59ef243-ee3d-45c3-81b8-75110e9f88a8"",
-                    ""path"": ""<Joystick>/{Hatswitch}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c8050806-9574-498a-b4d9-1f69e8a7e28a"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Interact"",
+                    ""groups"": """",
+                    ""action"": ""Fishing"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1192,8 +1150,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Conversation_NextDialouge = m_Conversation.FindAction("Next Dialouge", throwIfNotFound: true);
         // Fishing
         m_Fishing = asset.FindActionMap("Fishing", throwIfNotFound: true);
-        m_Fishing_Look = m_Fishing.FindAction("Look", throwIfNotFound: true);
-        m_Fishing_Interact = m_Fishing.FindAction("Interact", throwIfNotFound: true);
+        m_Fishing_Fishing = m_Fishing.FindAction("Fishing", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1537,14 +1494,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     // Fishing
     private readonly InputActionMap m_Fishing;
     private List<IFishingActions> m_FishingActionsCallbackInterfaces = new List<IFishingActions>();
-    private readonly InputAction m_Fishing_Look;
-    private readonly InputAction m_Fishing_Interact;
+    private readonly InputAction m_Fishing_Fishing;
     public struct FishingActions
     {
         private @InputSystem_Actions m_Wrapper;
         public FishingActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Look => m_Wrapper.m_Fishing_Look;
-        public InputAction @Interact => m_Wrapper.m_Fishing_Interact;
+        public InputAction @Fishing => m_Wrapper.m_Fishing_Fishing;
         public InputActionMap Get() { return m_Wrapper.m_Fishing; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1554,22 +1509,16 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_FishingActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_FishingActionsCallbackInterfaces.Add(instance);
-            @Look.started += instance.OnLook;
-            @Look.performed += instance.OnLook;
-            @Look.canceled += instance.OnLook;
-            @Interact.started += instance.OnInteract;
-            @Interact.performed += instance.OnInteract;
-            @Interact.canceled += instance.OnInteract;
+            @Fishing.started += instance.OnFishing;
+            @Fishing.performed += instance.OnFishing;
+            @Fishing.canceled += instance.OnFishing;
         }
 
         private void UnregisterCallbacks(IFishingActions instance)
         {
-            @Look.started -= instance.OnLook;
-            @Look.performed -= instance.OnLook;
-            @Look.canceled -= instance.OnLook;
-            @Interact.started -= instance.OnInteract;
-            @Interact.performed -= instance.OnInteract;
-            @Interact.canceled -= instance.OnInteract;
+            @Fishing.started -= instance.OnFishing;
+            @Fishing.performed -= instance.OnFishing;
+            @Fishing.canceled -= instance.OnFishing;
         }
 
         public void RemoveCallbacks(IFishingActions instance)
@@ -1663,7 +1612,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     }
     public interface IFishingActions
     {
-        void OnLook(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
+        void OnFishing(InputAction.CallbackContext context);
     }
 }
