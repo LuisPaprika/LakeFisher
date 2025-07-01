@@ -24,14 +24,19 @@ public class PlayerControl : MonoBehaviour
 
     private Vector2 moveInput;
     private Vector2 lookInput;
+    public static InputSystem_Actions inputActions;
 
-    public static bool EnableInput = true;
+    void Awake()
+    {
+        inputActions = new InputSystem_Actions();
+        SetActionMapByName("Player");
+    }
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
+        
         PlayerCamera = playerCameraTransform;
     }
 
@@ -43,7 +48,8 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-        if (EnableInput)
+
+        if (inputActions.Player.enabled)
         {
             HandleGrounded();
             HandleMovement();
@@ -51,6 +57,15 @@ public class PlayerControl : MonoBehaviour
             HandleCameraLook();
         }
 
+
+    }
+
+    public static void SetActionMapByName(string ActionMapName)
+    {
+        inputActions.Disable();
+        var actionMap = inputActions.asset.FindActionMap(ActionMapName);
+        actionMap.Enable();
+        Debug.Log("Set map to " + ActionMapName);
     }
 
     public void OnMove(InputValue value)

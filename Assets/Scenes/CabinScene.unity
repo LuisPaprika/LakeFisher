@@ -1728,7 +1728,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -129.3}
+  m_AnchoredPosition: {x: 0, y: -218.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &309429974
@@ -1778,8 +1778,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14.03
-  m_fontSizeBase: 14.03
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1816,7 +1816,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -108.71872, y: 0, z: -109.75516, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2154,7 +2154,7 @@ Transform:
   m_GameObject: {fileID: 411761836}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0007687009, z: -0, w: 0.9999997}
-  m_LocalPosition: {x: 195.958, y: 11.61, z: 44.283}
+  m_LocalPosition: {x: 210.99, y: 11.61, z: 38.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3579,8 +3579,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 13.84
-  m_fontSizeBase: 13.84
+  m_fontSize: 41.08
+  m_fontSizeBase: 41.08
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3713,6 +3713,7 @@ GameObject:
   - component: {fileID: 2309477216383568543}
   - component: {fileID: 4525528999049879856}
   - component: {fileID: 6752205503218553844}
+  - component: {fileID: 6752205503218553845}
   m_Layer: 0
   m_Name: WindowFrame
   m_TagString: Untagged
@@ -5710,6 +5711,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.005977126, y: 0.02, z: 0.019162288}
   m_Center: {x: -0.0070112003, y: -0.00000011831329, z: 0.028743424}
+--- !u!114 &6752205503218553845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158894769446452935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e69c7f09add21c47b1268b37f651b3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShownPrompt: Look Out of Window
 --- !u!23 &6777403520334185540
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6093,6 +6107,8 @@ GameObject:
   - component: {fileID: 4937040576805855947}
   - component: {fileID: 2066716039192714381}
   - component: {fileID: 762840993969478155}
+  - component: {fileID: 7948747657857438571}
+  - component: {fileID: 7948747657857438572}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -6100,6 +6116,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7948747657857438571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7948747657857438570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d39bbd1bbc51be42b55ce33a4ffb90f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShownPrompt: Go Fishing
+  sceneName: LakeScene
+  newActionMapName: Fishing
+--- !u!65 &7948747657857438572
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7948747657857438570}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.03130651, y: 0.023999995, z: 0.013304661}
+  m_Center: {x: -0.0026582626, y: 9.8584134e-11, z: 0.0006134105}
 --- !u!23 &8029106799645934810
 MeshRenderer:
   m_ObjectHideFlags: 0
