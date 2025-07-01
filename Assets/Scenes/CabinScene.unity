@@ -337,7 +337,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShownPrompt: Talk
   dialogue: {fileID: 11400000, guid: 399827c6511ffb442a04aa221bcb9b58, type: 2}
-  smoothSpeed: 5
 --- !u!1 &262194102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,7 +1644,7 @@ RectTransform:
   m_GameObject: {fileID: 283651783}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.024214, y: 0.024214, z: 0.024214}
+  m_LocalScale: {x: 0.13571705, y: 0.13571705, z: 0.13571705}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 415470247}
@@ -2154,7 +2153,7 @@ Transform:
   m_GameObject: {fileID: 411761836}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0007687009, z: -0, w: 0.9999997}
-  m_LocalPosition: {x: 219.21, y: 11.61, z: 47.67}
+  m_LocalPosition: {x: 209.47, y: 11.61, z: 44.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

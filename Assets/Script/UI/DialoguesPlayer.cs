@@ -15,7 +15,7 @@ public class DialoguesPlayer : MonoBehaviour
         PersonInteract.OnTalk += StartDialogue;
     }
 
-    private void StartDialogue(DialogueSO dialogue)
+    private void StartDialogue(DialogueSO dialogue, Vector3 vector3)
     {
         PlayerControl.SetActionMapByName("Conversation");
         currentDialogue = dialogue;

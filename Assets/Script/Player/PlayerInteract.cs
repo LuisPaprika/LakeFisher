@@ -13,19 +13,23 @@ public class PlayerInteract : MonoBehaviour
 
     void Update()
     {
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, InteractRange))
+        if (PlayerControl.inputActions.Player.enabled)
         {
-            if (hit.collider.TryGetComponent<InteractableBase>(out InteractableBase interactObj))
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, InteractRange))
             {
-                interactObj.Hovered();
-
-                if (PlayerControl.inputActions.FindAction("Interact").WasPerformedThisFrame())
+                if (hit.collider.TryGetComponent<InteractableBase>(out InteractableBase interactObj))
                 {
-                    interactObj.Interact();
-                }
-            }
+                    interactObj.Hovered();
 
+                    if (PlayerControl.inputActions.FindAction("Interact").WasPerformedThisFrame())
+                    {
+                        interactObj.Interact();
+                    }
+                }
+
+            }
         }
+
     }
 
 }
