@@ -1,40 +1,41 @@
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class FishSpot : MonoBehaviour
 {
+    [SerializeField] float targetTime = 5f;
     public void Fishing()
     {
-        StartCoroutine(fishCountdown(10f));
+        PlayerControl.castLineAtFish = true;
+        PlayerControl.isFishing = true;
+        StartCoroutine(fishCountdown(targetTime));
     }
 
-    private IEnumerator fishCountdown(float duration)
+    private IEnumerator fishCountdown(float time)
     {
-        float startTime = 0f;
-
-        while (startTime < duration)
+        float currentTime = 0f;
+        while (PlayerControl.isFishing)
         {
-            if (!PlayerControl.isFishing)
+            Debug.Log("Time passed:" + currentTime);
+            currentTime += Time.deltaTime;
+            if (currentTime > time)
             {
                 break;
             }
-            Debug.Log("Fish eating");
-            startTime += Time.deltaTime;
-            StartCoroutine(moveObject());
+
             yield return null;
         }
 
-        if (PlayerControl.isFishing)
+        if (PlayerControl.isFishing) //Player track the fish for target time
         {
-            Debug.Log("Fish bite the bait");
-            PlayerControl.isFishing = false;
+            Debug.Log("Fish bite");
         }
-        else
+        else //Player failed to track fish
         {
             Debug.Log("Fish escaped");
         }
-
     }
 
     private IEnumerator moveObject()

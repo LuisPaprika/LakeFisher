@@ -36,7 +36,6 @@ public class PlayerInteract : MonoBehaviour
 
                     if (PlayerControl.inputActions.FindAction("Fishing").WasPerformedThisFrame())
                     {
-                        PlayerControl.castLineAtFish = true;
                         fishSpot.Fishing();
                     }
 
