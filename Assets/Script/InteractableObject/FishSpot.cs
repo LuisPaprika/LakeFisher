@@ -15,15 +15,16 @@ public class FishSpot : MonoBehaviour
 
         while (startTime < duration && PlayerControl.isFishing)
         {
+            Debug.Log("Fish eating");
             startTime += Time.deltaTime;
             StartCoroutine(moveObject());
-            Debug.Log("Fish Eating: " + startTime);
             yield return null;
         }
 
         if (PlayerControl.isFishing)
         {
             Debug.Log("Fish bite the bait");
+            PlayerControl.isFishing = false;
         }
         else
         {
@@ -50,8 +51,8 @@ public class FishSpot : MonoBehaviour
             goLeft = !goLeft;
 
             float startTime = 0f;
-            float moveSpeed = UnityEngine.Random.Range(0.2f, 0.5f);
-            float duration = UnityEngine.Random.Range(0.2f, 1f); //duration that gameObject will move in this direction
+            float moveSpeed = 0.1f;//UnityEngine.Random.Range(0.5f, 0.75f);
+            int duration = 1;//UnityEngine.Random.Range(2, 4); //duration that gameObject will move in this direction
             while (startTime < duration && PlayerControl.isFishing)
             {
                 startTime += Time.deltaTime;
