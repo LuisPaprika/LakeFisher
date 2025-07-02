@@ -16,18 +16,20 @@ public class FishSpot : MonoBehaviour
         while (startTime < duration && PlayerControl.isFishing)
         {
             startTime += Time.deltaTime;
-            Debug.Log("Time passed: " + startTime);
+            gameObject.transform.position += Vector3.forward * Time.deltaTime; //Moving fishspot
+            Debug.Log("Fish Eating: " + startTime);
             yield return null;
         }
 
         if (PlayerControl.isFishing)
         {
-            Debug.Log("Fish eating bait");
+            Debug.Log("Fish bite the bait");
         }
         else
         {
             Debug.Log("Fish escaped");
         }
-        
+
     }
+
 }
