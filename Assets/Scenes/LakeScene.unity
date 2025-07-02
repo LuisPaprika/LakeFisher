@@ -3010,7 +3010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d313005ea437a64bad4726aa8386f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractRange: 10
+  InteractRange: 50
 --- !u!1 &436462930
 GameObject:
   m_ObjectHideFlags: 0
