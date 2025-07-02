@@ -27,7 +27,8 @@ public class PlayerControl : MonoBehaviour
 
     private Vector2 moveInput;
     private Vector2 lookInput;
-    public static bool isFishing;
+    public static bool isFishing = false;
+    public static bool castLineAtFish = false;
     public static InputSystem_Actions inputActions;
     [SerializeField] string startActionMap = "Player";
 
@@ -66,7 +67,6 @@ public class PlayerControl : MonoBehaviour
         {
             HandleCameraLook();
         }
-
     }
 
     void OnDestroy()

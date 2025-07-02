@@ -13,7 +13,6 @@ public class PlayerInteract : MonoBehaviour
 
     void Update()
     {
-        PlayerControl.isFishing = false;
         if (PlayerControl.inputActions.Player.enabled || PlayerControl.inputActions.Fishing.enabled)
         {
             if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, InteractRange))
@@ -30,15 +29,26 @@ public class PlayerInteract : MonoBehaviour
 
                 else if (hit.collider.TryGetComponent<FishSpot>(out FishSpot fishSpot))
                 {
-                    PlayerControl.isFishing = true;
+                    if (PlayerControl.castLineAtFish)
+                    {
+                        PlayerControl.isFishing = true;
+                    }
+
                     if (PlayerControl.inputActions.FindAction("Fishing").WasPerformedThisFrame())
                     {
+                        PlayerControl.castLineAtFish = true;
                         fishSpot.Fishing();
                     }
 
                 }
+                else
+                {
+                    PlayerControl.castLineAtFish = false;
+                    PlayerControl.isFishing = false;
+                }
 
             }
+            
         }
 
     }

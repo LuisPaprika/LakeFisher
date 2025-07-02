@@ -13,8 +13,12 @@ public class FishSpot : MonoBehaviour
     {
         float startTime = 0f;
 
-        while (startTime < duration && PlayerControl.isFishing)
+        while (startTime < duration)
         {
+            if (!PlayerControl.isFishing)
+            {
+                break;
+            }
             Debug.Log("Fish eating");
             startTime += Time.deltaTime;
             StartCoroutine(moveObject());
@@ -35,7 +39,6 @@ public class FishSpot : MonoBehaviour
 
     private IEnumerator moveObject()
     {
-        int count = 0;
         Vector3 moveDirection;
         bool goLeft = UnityEngine.Random.Range(0, 2) == 0;
         while (PlayerControl.isFishing)
@@ -52,15 +55,16 @@ public class FishSpot : MonoBehaviour
             goLeft = !goLeft;
 
             float startTime = 0f;
-            float moveSpeed = 0.5f;//UnityEngine.Random.Range(0.5f, 0.75f);
-            int duration = 2;//UnityEngine.Random.Range(2, 4); //duration that gameObject will move in this direction
-            while (startTime < duration && PlayerControl.isFishing)
+            float moveSpeed = 0.1f;
+            int duration = 2;
+            Debug.Log("Start");
+            while (startTime < duration)
             {
                 startTime += Time.deltaTime;
                 gameObject.transform.position += moveDirection * moveSpeed * Time.deltaTime;
-
                 yield return null;
             }
+            Debug.Log("End:" + startTime);
         }
     }
 
