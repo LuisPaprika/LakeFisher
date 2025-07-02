@@ -35,11 +35,12 @@ public class FishSpot : MonoBehaviour
 
     private IEnumerator moveObject()
     {
+        int count = 0;
         Vector3 moveDirection;
-        int choice = UnityEngine.Random.Range(0, 2); //choice will be either 0 or 1
-        bool goLeft = choice == 0 ? true : false;
+        bool goLeft = UnityEngine.Random.Range(0, 2) == 0;
         while (PlayerControl.isFishing)
         {
+            Debug.Log("Start New Direction: " + (goLeft ? "Left" : "Right"));
             if (goLeft)
             {
                 moveDirection = Vector3.back;
@@ -51,8 +52,8 @@ public class FishSpot : MonoBehaviour
             goLeft = !goLeft;
 
             float startTime = 0f;
-            float moveSpeed = 0.1f;//UnityEngine.Random.Range(0.5f, 0.75f);
-            int duration = 1;//UnityEngine.Random.Range(2, 4); //duration that gameObject will move in this direction
+            float moveSpeed = 0.5f;//UnityEngine.Random.Range(0.5f, 0.75f);
+            int duration = 2;//UnityEngine.Random.Range(2, 4); //duration that gameObject will move in this direction
             while (startTime < duration && PlayerControl.isFishing)
             {
                 startTime += Time.deltaTime;
@@ -60,7 +61,6 @@ public class FishSpot : MonoBehaviour
 
                 yield return null;
             }
-
         }
     }
 
