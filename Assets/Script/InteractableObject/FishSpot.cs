@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class FishSpot : MonoBehaviour
 {
-    [SerializeField] float targetTime = 5f;
+    [SerializeField] float fishingTime = 5f;
+    [SerializeField] float moveSpeed = 1.5f; //default 1.5
     public void Fishing()
     {
         PlayerControl.castLineAtFish = true;
         PlayerControl.isFishing = true;
-        StartCoroutine(fishCountdown(targetTime));
+        StartCoroutine(fishCountdown(fishingTime));
     }
 
     private IEnumerator fishCountdown(float time)
@@ -19,6 +20,7 @@ public class FishSpot : MonoBehaviour
         while (PlayerControl.isFishing)
         {
             Debug.Log("Time passed:" + currentTime);
+            moveObject('R');
             currentTime += Time.deltaTime;
             if (currentTime > time)
             {
@@ -38,35 +40,21 @@ public class FishSpot : MonoBehaviour
         }
     }
 
-    private IEnumerator moveObject()
+    private void moveObject(char direction)
     {
-        Vector3 moveDirection;
-        bool goLeft = UnityEngine.Random.Range(0, 2) == 0;
-        while (PlayerControl.isFishing)
+        if (direction == 'R')
         {
-            Debug.Log("Start New Direction: " + (goLeft ? "Left" : "Right"));
-            if (goLeft)
-            {
-                moveDirection = Vector3.back;
-            }
-            else
-            {
-                moveDirection = Vector3.forward;
-            }
-            goLeft = !goLeft;
-
-            float startTime = 0f;
-            float moveSpeed = 0.1f;
-            int duration = 2;
-            Debug.Log("Start");
-            while (startTime < duration)
-            {
-                startTime += Time.deltaTime;
-                gameObject.transform.position += moveDirection * moveSpeed * Time.deltaTime;
-                yield return null;
-            }
-            Debug.Log("End:" + startTime);
+            gameObject.transform.position += Vector3.forward * Time.deltaTime * moveSpeed;
         }
+        else if (direction == 'L')
+        {
+            gameObject.transform.position += Vector3.back * Time.deltaTime * moveSpeed;
+        }
+        else
+        {
+            Debug.LogError("moveObject parameter needs to be 'R' or 'L'");
+        }
+        
     }
 
 }
