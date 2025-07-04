@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +16,7 @@ public class PlayerControl : MonoBehaviour
     [Header("Camera Look")]
     public float lookSpeed = 2.0f;
     public float lookXLimit = 90.0f;
+    [SerializeField] float rotationSpeed = 0.25f;
 
     [Header("Physics")]
     public float gravity = -15.0f;
@@ -24,8 +27,18 @@ public class PlayerControl : MonoBehaviour
 
     private Vector2 moveInput;
     private Vector2 lookInput;
+    public static bool isFishing = false;
+    public static bool castLineAtFish = false;
+    public static InputSystem_Actions inputActions;
+    [SerializeField] string startActionMap = "Player";
 
-    public static bool EnableInput = true;
+    void Awake()
+    {
+        inputActions = new InputSystem_Actions();
+        SetActionMapByName(startActionMap);
+
+        PersonInteract.OnTalk += Look;
+    }
 
     void Start()
     {
@@ -43,14 +56,54 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-        if (EnableInput)
+        if (inputActions.Player.enabled)
         {
             HandleGrounded();
             HandleMovement();
             HandleGravity();
-            HandleCameraLook();
         }
 
+        if (!inputActions.Conversation.enabled)
+        {
+            HandleCameraLook();
+        }
+    }
+
+    void OnDestroy()
+    {
+        inputActions.Disable();
+    }
+
+    private void Look(DialogueSO dialogue, Vector3 positionVector)
+    {
+        StartCoroutine(RotateToTarget(positionVector, rotationSpeed));
+    }
+
+    private IEnumerator RotateToTarget(Vector3 target, float duration)
+    {
+        Quaternion startRotation = PlayerCamera.rotation;
+        Vector3 direction = target - PlayerCamera.position;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        float startTime = 0f;
+
+        while (startTime < duration)
+        {
+            startTime += Time.deltaTime;
+            float t = Mathf.Clamp01(startTime / duration);
+            PlayerCamera.rotation = Quaternion.Lerp(startRotation, targetRotation, t); //Slowly turning camera
+            yield return null;
+        }
+
+        Vector3 finalEuler = PlayerCamera.localRotation.eulerAngles;
+        rotationX = finalEuler.x;
+        
+    }
+
+    public static void SetActionMapByName(string ActionMapName)
+    {
+        inputActions.Disable();
+        var actionMap = inputActions.asset.FindActionMap(ActionMapName);
+        actionMap.Enable();
     }
 
     public void OnMove(InputValue value)

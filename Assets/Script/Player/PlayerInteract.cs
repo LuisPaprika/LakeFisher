@@ -6,24 +6,14 @@ public class PlayerInteract : MonoBehaviour
 {
     [SerializeField] float InteractRange = 2.5f;
     private Camera playerCamera;
-    private InputSystem_Actions inputActions;
-    public static bool EnableInteract = true;
     void Awake()
     {
         playerCamera = gameObject.GetComponentInChildren<Camera>();
-
-        inputActions = new InputSystem_Actions();
-        inputActions.Enable();
-    }
-
-    void OnDestroy()
-    {
-        inputActions.Disable();
     }
 
     void Update()
     {
-        if (EnableInteract)
+        if (PlayerControl.inputActions.Player.enabled || PlayerControl.inputActions.Fishing.enabled)
         {
             if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, InteractRange))
             {
@@ -31,14 +21,36 @@ public class PlayerInteract : MonoBehaviour
                 {
                     interactObj.Hovered();
 
-                    if (inputActions.Player.Interact.WasPerformedThisFrame())
+                    if (PlayerControl.inputActions.FindAction("Interact").WasPerformedThisFrame())
                     {
                         interactObj.Interact();
                     }
                 }
 
+                else if (hit.collider.TryGetComponent<FishSpot>(out FishSpot fishSpot))
+                {
+                    if (PlayerControl.castLineAtFish)
+                    {
+                        PlayerControl.isFishing = true;
+                    }
+
+                    if (PlayerControl.inputActions.FindAction("Fishing").WasPerformedThisFrame())
+                    {
+                        fishSpot.Fishing();
+                    }
+
+                }
+                else
+                {
+                    PlayerControl.castLineAtFish = false;
+                    PlayerControl.isFishing = false;
+                }
+
             }
+            
         }
 
     }
+
 }
+
