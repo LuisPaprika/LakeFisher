@@ -1042,6 +1042,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""071cb14d-62ba-4204-ab23-62598980df52"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1053,6 +1062,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Fishing"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ff0d96e-671e-460e-895b-7cbbeb2fd467"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1151,6 +1171,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         // Fishing
         m_Fishing = asset.FindActionMap("Fishing", throwIfNotFound: true);
         m_Fishing_Fishing = m_Fishing.FindAction("Fishing", throwIfNotFound: true);
+        m_Fishing_Interact = m_Fishing.FindAction("Interact", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1495,11 +1516,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Fishing;
     private List<IFishingActions> m_FishingActionsCallbackInterfaces = new List<IFishingActions>();
     private readonly InputAction m_Fishing_Fishing;
+    private readonly InputAction m_Fishing_Interact;
     public struct FishingActions
     {
         private @InputSystem_Actions m_Wrapper;
         public FishingActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Fishing => m_Wrapper.m_Fishing_Fishing;
+        public InputAction @Interact => m_Wrapper.m_Fishing_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Fishing; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1512,6 +1535,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Fishing.started += instance.OnFishing;
             @Fishing.performed += instance.OnFishing;
             @Fishing.canceled += instance.OnFishing;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IFishingActions instance)
@@ -1519,6 +1545,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Fishing.started -= instance.OnFishing;
             @Fishing.performed -= instance.OnFishing;
             @Fishing.canceled -= instance.OnFishing;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IFishingActions instance)
@@ -1613,5 +1642,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     public interface IFishingActions
     {
         void OnFishing(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
