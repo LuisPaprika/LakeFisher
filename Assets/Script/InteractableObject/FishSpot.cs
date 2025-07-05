@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class FishSpot : MonoBehaviour
 {
-    [SerializeField] float fishingTime = 5f;
+    [SerializeField] float fishingTime = 1f;
     [SerializeField] float moveSpeed = 2f; //default 1
+    public static event Action onFishBite;
     private bool finishedMoving;
     private bool goForward;
     private int moveDuration;
@@ -12,14 +14,14 @@ public class FishSpot : MonoBehaviour
     void Awake()
     {
         finishedMoving = true;
-        goForward = Random.Range(0, 2) == 0 ? false : true;
+        goForward = UnityEngine.Random.Range(0, 2) == 0 ? false : true;
     }
 
     void Update()
     {
         if (finishedMoving)
         {
-            moveDuration = Random.Range(1, 3);
+            moveDuration = UnityEngine.Random.Range(1, 3);
             StartCoroutine(moveObject());
         }
     }
@@ -47,7 +49,7 @@ public class FishSpot : MonoBehaviour
 
         if (PlayerControl.isFishing) //Player track the fish for target time
         {
-            Debug.Log("Fish bite");
+            onFishBite.Invoke();
         }
         else //Player failed to track fish
         {

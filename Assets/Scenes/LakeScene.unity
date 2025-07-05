@@ -3218,7 +3218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c468702a219187041b27d51c3654ffad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishingTime: 5
+  fishingTime: 1
   moveSpeed: 1
 --- !u!1 &507457880
 GameObject:
