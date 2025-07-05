@@ -6,7 +6,8 @@ public class FishSpot : MonoBehaviour
 {
     [SerializeField] float fishingTime = 1f;
     [SerializeField] float moveSpeed = 2f; //default 1
-    public static event Action onFishBite;
+    [SerializeField] int actionCounts = 5;
+    public static event Action<int> onFishBite;
     private bool finishedMoving;
     private bool goForward;
     private int moveDuration;
@@ -49,7 +50,7 @@ public class FishSpot : MonoBehaviour
 
         if (PlayerControl.isFishing) //Player track the fish for target time
         {
-            onFishBite.Invoke();
+            onFishBite.Invoke(actionCounts);
         }
         else //Player failed to track fish
         {
