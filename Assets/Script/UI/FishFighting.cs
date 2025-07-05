@@ -32,42 +32,26 @@ public class FishFighting : MonoBehaviour
     {
         if (PlayerControl.inputActions.FishFighting.Up.WasPerformedThisFrame())
         {
-            pressedButtons.Add(Arrow.ArrowType.Up);
-            GameObject gameObj = Instantiate(spritePrefab, inputButtons.transform);
-            if (gameObj.TryGetComponent<Image>(out Image image))
-            {
-                image.sprite = Arrow.GetSprite(Arrow.ArrowType.Up);
-            }
+            Arrow.ArrowType input = Arrow.ArrowType.Up;
+            displayInput(input);
         }
 
         else if (PlayerControl.inputActions.FishFighting.Down.WasPerformedThisFrame())
         {
-            pressedButtons.Add(Arrow.ArrowType.Down);
-            GameObject gameObj = Instantiate(spritePrefab, inputButtons.transform);
-            if (gameObj.TryGetComponent<Image>(out Image image))
-            {
-                image.sprite = Arrow.GetSprite(Arrow.ArrowType.Down);
-            }
+            Arrow.ArrowType input = Arrow.ArrowType.Down;
+            displayInput(input);
         }
 
         else if (PlayerControl.inputActions.FishFighting.Left.WasPerformedThisFrame())
         {
-            pressedButtons.Add(Arrow.ArrowType.Left);
-            GameObject gameObj = Instantiate(spritePrefab, inputButtons.transform);
-            if (gameObj.TryGetComponent<Image>(out Image image))
-            {
-                image.sprite = Arrow.GetSprite(Arrow.ArrowType.Left);
-            }
+            Arrow.ArrowType input = Arrow.ArrowType.Left;
+            displayInput(input);
         }
 
         else if (PlayerControl.inputActions.FishFighting.Right.WasPerformedThisFrame())
         {
-            pressedButtons.Add(Arrow.ArrowType.Right);
-            GameObject gameObj = Instantiate(spritePrefab, inputButtons.transform);
-            if (gameObj.TryGetComponent<Image>(out Image image))
-            {
-                image.sprite = Arrow.GetSprite(Arrow.ArrowType.Right);
-            }
+            Arrow.ArrowType input = Arrow.ArrowType.Right;
+            displayInput(input);
         }
     }
 
@@ -75,6 +59,16 @@ public class FishFighting : MonoBehaviour
     {
         PlayerControl.SetActionMapByName("FishFighting");
         minigameUI.SetActive(true);
+    }
+
+    private void displayInput(Arrow.ArrowType input)
+    {
+        pressedButtons.Add(input);
+        GameObject gameObj = Instantiate(spritePrefab, inputButtons.transform);
+        if (gameObj.TryGetComponent<Image>(out Image image))
+        {
+            image.sprite = Arrow.GetSprite(input);
+        }
     }
 
 }
