@@ -1042,6 +1042,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""071cb14d-62ba-4204-ab23-62598980df52"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1053,6 +1062,105 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Fishing"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ff0d96e-671e-460e-895b-7cbbeb2fd467"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""FishFighting"",
+            ""id"": ""3177274e-a55e-4546-988b-47358fdc94d1"",
+            ""actions"": [
+                {
+                    ""name"": ""Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""d9d84e4d-9042-4337-8d8e-48e6281d2917"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""3ec993b7-7780-491f-be69-05830237b60f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""67921efb-ae62-484a-8677-1e8d0c9da3e8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""962d2c41-d0d5-4872-b402-f782d80e492b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2d0d8f69-693e-487f-9464-f329fe5cbdcf"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""31f4e244-4f1f-49c0-b6fb-85c8b54310a3"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4adc1f0-5c83-4bf3-84ee-2e4774246715"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc0720e3-68fc-41ba-abbe-c52402266734"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1151,6 +1259,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         // Fishing
         m_Fishing = asset.FindActionMap("Fishing", throwIfNotFound: true);
         m_Fishing_Fishing = m_Fishing.FindAction("Fishing", throwIfNotFound: true);
+        m_Fishing_Interact = m_Fishing.FindAction("Interact", throwIfNotFound: true);
+        // FishFighting
+        m_FishFighting = asset.FindActionMap("FishFighting", throwIfNotFound: true);
+        m_FishFighting_Up = m_FishFighting.FindAction("Up", throwIfNotFound: true);
+        m_FishFighting_Down = m_FishFighting.FindAction("Down", throwIfNotFound: true);
+        m_FishFighting_Left = m_FishFighting.FindAction("Left", throwIfNotFound: true);
+        m_FishFighting_Right = m_FishFighting.FindAction("Right", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1159,6 +1274,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Conversation.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Conversation.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Fishing.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Fishing.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_FishFighting.enabled, "This will cause a leak and performance issues, InputSystem_Actions.FishFighting.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -1495,11 +1611,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Fishing;
     private List<IFishingActions> m_FishingActionsCallbackInterfaces = new List<IFishingActions>();
     private readonly InputAction m_Fishing_Fishing;
+    private readonly InputAction m_Fishing_Interact;
     public struct FishingActions
     {
         private @InputSystem_Actions m_Wrapper;
         public FishingActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Fishing => m_Wrapper.m_Fishing_Fishing;
+        public InputAction @Interact => m_Wrapper.m_Fishing_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Fishing; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1512,6 +1630,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Fishing.started += instance.OnFishing;
             @Fishing.performed += instance.OnFishing;
             @Fishing.canceled += instance.OnFishing;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IFishingActions instance)
@@ -1519,6 +1640,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Fishing.started -= instance.OnFishing;
             @Fishing.performed -= instance.OnFishing;
             @Fishing.canceled -= instance.OnFishing;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IFishingActions instance)
@@ -1536,6 +1660,76 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         }
     }
     public FishingActions @Fishing => new FishingActions(this);
+
+    // FishFighting
+    private readonly InputActionMap m_FishFighting;
+    private List<IFishFightingActions> m_FishFightingActionsCallbackInterfaces = new List<IFishFightingActions>();
+    private readonly InputAction m_FishFighting_Up;
+    private readonly InputAction m_FishFighting_Down;
+    private readonly InputAction m_FishFighting_Left;
+    private readonly InputAction m_FishFighting_Right;
+    public struct FishFightingActions
+    {
+        private @InputSystem_Actions m_Wrapper;
+        public FishFightingActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Up => m_Wrapper.m_FishFighting_Up;
+        public InputAction @Down => m_Wrapper.m_FishFighting_Down;
+        public InputAction @Left => m_Wrapper.m_FishFighting_Left;
+        public InputAction @Right => m_Wrapper.m_FishFighting_Right;
+        public InputActionMap Get() { return m_Wrapper.m_FishFighting; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(FishFightingActions set) { return set.Get(); }
+        public void AddCallbacks(IFishFightingActions instance)
+        {
+            if (instance == null || m_Wrapper.m_FishFightingActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_FishFightingActionsCallbackInterfaces.Add(instance);
+            @Up.started += instance.OnUp;
+            @Up.performed += instance.OnUp;
+            @Up.canceled += instance.OnUp;
+            @Down.started += instance.OnDown;
+            @Down.performed += instance.OnDown;
+            @Down.canceled += instance.OnDown;
+            @Left.started += instance.OnLeft;
+            @Left.performed += instance.OnLeft;
+            @Left.canceled += instance.OnLeft;
+            @Right.started += instance.OnRight;
+            @Right.performed += instance.OnRight;
+            @Right.canceled += instance.OnRight;
+        }
+
+        private void UnregisterCallbacks(IFishFightingActions instance)
+        {
+            @Up.started -= instance.OnUp;
+            @Up.performed -= instance.OnUp;
+            @Up.canceled -= instance.OnUp;
+            @Down.started -= instance.OnDown;
+            @Down.performed -= instance.OnDown;
+            @Down.canceled -= instance.OnDown;
+            @Left.started -= instance.OnLeft;
+            @Left.performed -= instance.OnLeft;
+            @Left.canceled -= instance.OnLeft;
+            @Right.started -= instance.OnRight;
+            @Right.performed -= instance.OnRight;
+            @Right.canceled -= instance.OnRight;
+        }
+
+        public void RemoveCallbacks(IFishFightingActions instance)
+        {
+            if (m_Wrapper.m_FishFightingActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IFishFightingActions instance)
+        {
+            foreach (var item in m_Wrapper.m_FishFightingActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_FishFightingActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public FishFightingActions @FishFighting => new FishFightingActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1613,5 +1807,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     public interface IFishingActions
     {
         void OnFishing(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+    }
+    public interface IFishFightingActions
+    {
+        void OnUp(InputAction.CallbackContext context);
+        void OnDown(InputAction.CallbackContext context);
+        void OnLeft(InputAction.CallbackContext context);
+        void OnRight(InputAction.CallbackContext context);
     }
 }

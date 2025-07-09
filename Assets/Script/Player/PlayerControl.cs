@@ -63,7 +63,7 @@ public class PlayerControl : MonoBehaviour
             HandleGravity();
         }
 
-        if (!inputActions.Conversation.enabled)
+        if (!inputActions.Conversation.enabled && !inputActions.FishFighting.enabled)
         {
             HandleCameraLook();
         }
