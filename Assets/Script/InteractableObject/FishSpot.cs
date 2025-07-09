@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FishSpot : MonoBehaviour
 {
-    [SerializeField] float fishingTime = 1f;
-    [SerializeField] float moveSpeed = 2f; //default 1
+    [SerializeField] float fishingTime = 5f;
+    [SerializeField] float moveSpeed = 2f;
     [SerializeField] int actionCounts = 5;
     public static event Action<int> onFishBite;
     private bool finishedMoving;
@@ -38,7 +38,7 @@ public class FishSpot : MonoBehaviour
         float currentTime = 0f;
         while (PlayerControl.isFishing)
         {
-            Debug.Log("Time passed:" + currentTime);
+            //Debug.Log("Time passed:" + currentTime);
             currentTime += Time.deltaTime;
             if (currentTime > time)
             {

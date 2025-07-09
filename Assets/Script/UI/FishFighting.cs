@@ -1,18 +1,22 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class FishFighting : MonoBehaviour
 {
+    [SerializeField] GameObject dayController;
     [SerializeField] GameObject spritePrefab;
     [SerializeField] GameObject answerButtons;
     [SerializeField] GameObject inputButtons;
     [SerializeField] GameObject minigameUI;
-    private List<Arrow.ArrowType> correctButtonsList = new List<Arrow.ArrowType>() { Arrow.ArrowType.Up, Arrow.ArrowType.Down, Arrow.ArrowType.Left, Arrow.ArrowType.Right };
+    private List<Arrow.ArrowType> correctButtonsList = new List<Arrow.ArrowType>();
     private int index;
+    private DayController dayControllerScript;
     void Awake()
     {
         FishSpot.onFishBite += enableFishFight;
+        dayControllerScript = dayController.GetComponent<DayController>();
     }
 
     void Update()
@@ -46,8 +50,29 @@ public class FishFighting : MonoBehaviour
         }
     }
 
-    private void enableFishFight(int actionCounts)
+    private void enableFishFight(int actionCounts) //start fish fighting
     {
+        correctButtonsList.Clear();
+        for (int i = 0; i < actionCounts; i++)
+        {
+            int direction = UnityEngine.Random.Range(1, 4);
+            switch (direction)
+            {
+                case 1:
+                    correctButtonsList.Add(Arrow.ArrowType.Up);
+                    break;
+                case 2:
+                    correctButtonsList.Add(Arrow.ArrowType.Down);
+                    break;
+                case 3:
+                    correctButtonsList.Add(Arrow.ArrowType.Left);
+                    break;
+                case 4:
+                    correctButtonsList.Add(Arrow.ArrowType.Right);
+                    break;
+            }
+        }
+
         index = -1;
         foreach (Arrow.ArrowType action in correctButtonsList)
         {
@@ -79,10 +104,22 @@ public class FishFighting : MonoBehaviour
         index++;
         if (button != correctButtonsList[index])
         {
-            minigameUI.SetActive(false);
-            clearObjectChildren(inputButtons.transform);
-            clearObjectChildren(answerButtons.transform);
-            PlayerControl.SetActionMapByName("Fishing");
+            Debug.Log("Wrong Input");
+            exitFishFight();
         }
+        else if (index == correctButtonsList.Count - 1) //finish fish fighting
+        {
+            dayControllerScript.addFish(1);
+            exitFishFight();
+            dayControllerScript.createFishSpot();
+        }
+    }
+
+    private void exitFishFight()
+    {
+        minigameUI.SetActive(false);
+        clearObjectChildren(inputButtons.transform);
+        clearObjectChildren(answerButtons.transform);
+        PlayerControl.SetActionMapByName("Fishing");
     }
 }

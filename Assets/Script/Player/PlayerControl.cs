@@ -21,14 +21,17 @@ public class PlayerControl : MonoBehaviour
     [Header("Physics")]
     public float gravity = -15.0f;
 
+    [Header("Fishing")]
+    public static bool isFishing = false;
+    public static bool castLineAtFish = false;
+
+    
     private Vector3 playerVelocity;
     private bool isGrounded;
     private float rotationX = 0;
 
     private Vector2 moveInput;
     private Vector2 lookInput;
-    public static bool isFishing = false;
-    public static bool castLineAtFish = false;
     public static InputSystem_Actions inputActions;
     [SerializeField] string startActionMap = "Player";
 
