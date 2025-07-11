@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DayController : MonoBehaviour
 {
     [SerializeField] GameObject fishSpotPrefab;
     [SerializeField] GameObject timer;
+    [SerializeField] TMP_Text dayCounter;
+    [SerializeField] TMP_Text fishCounter;
     private float time;
     private List<Vector3> spawnPositionsList = new List<Vector3>()
     {
@@ -19,7 +22,7 @@ public class DayController : MonoBehaviour
     public static event Action onTimerEnd;
     public static event Action<int> onStartTimer;
     private Dictionary<int, int> goal; //Key is dayCount value is fishGoal
-    private int dayCount = 1; //dayCount 0 is tutorial
+    private int dayCount = 0; //dayCount 0 is tutorial
     private int fishCount = 0;
     private GameObject fishSpotGameObj;
     private bool doneFishing = false;
@@ -51,6 +54,7 @@ public class DayController : MonoBehaviour
     public void addFish(int amount)
     {
         fishCount += amount;
+        fishCounter.text = fishCount.ToString();
         Debug.Log("Fish Count:" + fishCount);
         if (fishCount >= goal[dayCount])
         {
@@ -68,12 +72,13 @@ public class DayController : MonoBehaviour
         if (doneFishing)
         {
             dayCount++;
+            dayCounter.text = dayCount.ToString();
             fishCount = 0;
-            Debug.Log("This is day " + dayCount);
+            fishCounter.text = fishCount.ToString();
         }
         else
         {
-            Debug.Log("I still need to fish. Today is " + dayCount);
+            Debug.Log("I still need to fish.");
         }
     }
 
