@@ -21,33 +21,37 @@ public class FishFighting : MonoBehaviour
 
     void Update()
     {
-        if (PlayerControl.inputActions.FishFighting.Up.WasPerformedThisFrame())
+        if (PlayerControl.inputActions != null)
         {
-            Arrow.ArrowType input = Arrow.ArrowType.Up;
-            displayButtonAtGameObject(input, inputButtons);
-            checkButton(input);
+            if (PlayerControl.inputActions.FishFighting.Up.WasPerformedThisFrame())
+            {
+                Arrow.ArrowType input = Arrow.ArrowType.Up;
+                displayButtonAtGameObject(input, inputButtons);
+                checkButton(input);
+            }
+
+            else if (PlayerControl.inputActions.FishFighting.Down.WasPerformedThisFrame())
+            {
+                Arrow.ArrowType input = Arrow.ArrowType.Down;
+                displayButtonAtGameObject(input, inputButtons);
+                checkButton(input);
+            }
+
+            else if (PlayerControl.inputActions.FishFighting.Left.WasPerformedThisFrame())
+            {
+                Arrow.ArrowType input = Arrow.ArrowType.Left;
+                displayButtonAtGameObject(input, inputButtons);
+                checkButton(input);
+            }
+
+            else if (PlayerControl.inputActions.FishFighting.Right.WasPerformedThisFrame())
+            {
+                Arrow.ArrowType input = Arrow.ArrowType.Right;
+                displayButtonAtGameObject(input, inputButtons);
+                checkButton(input);
+            }
         }
 
-        else if (PlayerControl.inputActions.FishFighting.Down.WasPerformedThisFrame())
-        {
-            Arrow.ArrowType input = Arrow.ArrowType.Down;
-            displayButtonAtGameObject(input, inputButtons);
-            checkButton(input);
-        }
-
-        else if (PlayerControl.inputActions.FishFighting.Left.WasPerformedThisFrame())
-        {
-            Arrow.ArrowType input = Arrow.ArrowType.Left;
-            displayButtonAtGameObject(input, inputButtons);
-            checkButton(input);
-        }
-
-        else if (PlayerControl.inputActions.FishFighting.Right.WasPerformedThisFrame())
-        {
-            Arrow.ArrowType input = Arrow.ArrowType.Right;
-            displayButtonAtGameObject(input, inputButtons);
-            checkButton(input);
-        }
     }
 
     private void enableFishFight(int actionCounts) //start fish fighting
@@ -106,6 +110,7 @@ public class FishFighting : MonoBehaviour
         {
             Debug.Log("Wrong Input");
             exitFishFight();
+            dayControllerScript.createFishSpot();
         }
         else if (index == correctButtonsList.Count - 1) //finish fish fighting
         {

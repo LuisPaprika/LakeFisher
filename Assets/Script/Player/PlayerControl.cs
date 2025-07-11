@@ -40,7 +40,7 @@ public class PlayerControl : MonoBehaviour
         inputActions = new InputSystem_Actions();
         SetActionMapByName(startActionMap);
 
-        PersonInteract.OnTalk += Look;
+        //PersonInteract.OnTalk += Look;
     }
 
     void Start()
