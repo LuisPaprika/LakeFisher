@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,12 +12,14 @@ public class FishFighting : MonoBehaviour
     [SerializeField] GameObject answerButtons;
     [SerializeField] GameObject inputButtons;
     [SerializeField] GameObject minigameUI;
+    public static event Action onExitFishFight;
     private List<Arrow.ArrowType> correctButtonsList = new List<Arrow.ArrowType>();
     private int index;
     private DayController dayControllerScript;
     void Awake()
     {
-        FishSpot.onFishBite += enableFishFight;
+        DayController.onTimerEnd += exitFishFight;
+        DayController.onStartTimer += enableFishFight;
         dayControllerScript = dayController.GetComponent<DayController>();
     }
 
@@ -52,6 +56,7 @@ public class FishFighting : MonoBehaviour
             }
         }
 
+
     }
 
     private void enableFishFight(int actionCounts) //start fish fighting
@@ -84,6 +89,7 @@ public class FishFighting : MonoBehaviour
         }
         PlayerControl.SetActionMapByName("FishFighting");
         minigameUI.SetActive(true);
+        
     }
 
     private void displayButtonAtGameObject(Arrow.ArrowType button, GameObject parent)
@@ -126,5 +132,6 @@ public class FishFighting : MonoBehaviour
         clearObjectChildren(inputButtons.transform);
         clearObjectChildren(answerButtons.transform);
         PlayerControl.SetActionMapByName("Fishing");
+        onExitFishFight.Invoke();
     }
 }
