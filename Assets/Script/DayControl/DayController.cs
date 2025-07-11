@@ -20,7 +20,7 @@ public class DayController : MonoBehaviour
     };
     public static DayController Instance;
     public static event Action onTimerEnd;
-    public static event Action<int> onStartTimer;
+    public static event Action<int> onStartFightTimer;
     private Dictionary<int, int> goal; //Key is dayCount value is fishGoal
     private int dayCount = 0; //dayCount 0 is tutorial
     private int fishCount = 0;
@@ -84,17 +84,19 @@ public class DayController : MonoBehaviour
 
     public void createFishSpot()
     {
-
-        if (fishSpotGameObj != null)
+        if (fishSpotGameObj != null) 
         {
             Destroy(fishSpotGameObj);
             fishSpotGameObj = null;
         }
 
-        if (!doneFishing)
+        if (!doneFishing) //Creating fishSpot and setting its values
         {
             Vector3 spawnPostion = spawnPositionsList[UnityEngine.Random.Range(0, 4)];
             fishSpotGameObj = Instantiate(fishSpotPrefab, spawnPostion, Quaternion.identity);
+            FishSpot fishSpotScript = fishSpotGameObj.GetComponent<FishSpot>();
+            fishSpotScript.fishingTime = getFishingTimeFromDay();
+            fishSpotScript.moveSpeed = 1f;
         }
 
     }
@@ -141,32 +143,32 @@ public class DayController : MonoBehaviour
             case 0:
                 time = 10;
                 actionCounts = 4;
-                onStartTimer.Invoke(actionCounts);
-                StartCoroutine(startTimer());
+                onStartFightTimer.Invoke(actionCounts);
+                StartCoroutine(IncreasingTimer(timer));
                 break;
             case 1:
                 time = 8;
                 actionCounts = 6;
-                onStartTimer.Invoke(actionCounts);
-                StartCoroutine(startTimer());
+                onStartFightTimer.Invoke(actionCounts);
+                StartCoroutine(IncreasingTimer(timer));
                 break;
             case 2:
                 time = 7;
                 actionCounts = 8;
-                onStartTimer.Invoke(actionCounts);
-                StartCoroutine(startTimer());
+                onStartFightTimer.Invoke(actionCounts);
+                StartCoroutine(IncreasingTimer(timer));
                 break;
             case 3:
                 time = 6;
                 actionCounts = 10;
-                onStartTimer.Invoke(actionCounts);
-                StartCoroutine(startTimer());
+                onStartFightTimer.Invoke(actionCounts);
+                StartCoroutine(IncreasingTimer(timer));
                 break;
             case 4:
                 time = 4;
                 actionCounts = 12;
-                onStartTimer.Invoke(actionCounts);
-                StartCoroutine(startTimer());
+                onStartFightTimer.Invoke(actionCounts);
+                StartCoroutine(IncreasingTimer(timer));
                 break;
         }
     }
@@ -175,8 +177,26 @@ public class DayController : MonoBehaviour
     {
         time = 0;
     }
+    private float getFishingTimeFromDay()
+    {
+        switch (dayCount)
+        {
+            case 0:
+                return 50f;
+            case 1:
+                return 8f;
+            case 2:
+                return 10f;
+            case 3:
+                return 13f;
+            case 4:
+                return 18f;
+            default:
+                return 10f;
+        }
+    }
 
-    private IEnumerator startTimer()
+    private IEnumerator IncreasingTimer(GameObject timer)
     {
         float startTime = 0f;
         while (startTime < time)

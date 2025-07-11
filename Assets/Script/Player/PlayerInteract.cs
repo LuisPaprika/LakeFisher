@@ -27,25 +27,21 @@ public class PlayerInteract : MonoBehaviour
                     }
                 }
 
-                else if (hit.collider.TryGetComponent<FishSpot>(out FishSpot fishSpot))
+                else if (hit.collider.TryGetComponent<FishSpot>(out FishSpot fishSpot)) //when look at fishSpot
                 {
-                    if (PlayerControl.castLineAtFish)
-                    {
-                        PlayerControl.isFishing = true;
-                    }
-
+                    PlayerControl.isFishing = true;
                     if (PlayerControl.inputActions.FindAction("Fishing").WasPerformedThisFrame())
                     {
+                        PlayerControl.castLineAtFish = true;
                         fishSpot.Fishing();
                     }
 
                 }
+
                 else
                 {
-                    PlayerControl.castLineAtFish = false;
                     PlayerControl.isFishing = false;
                 }
-
             }
             
         }

@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class FishSpot : MonoBehaviour
 {
-    [SerializeField] float fishingTime = 5f;
-    [SerializeField] float moveSpeed = 2f;
+    [SerializeField] GameObject fishingGauge;
+    public float fishingTime;
+    public float moveSpeed;
     public static event Action onFishBite;
     private bool finishedMoving;
     private bool goForward;
     private int moveDuration;
+    private float currentTime;
 
     void Awake()
     {
@@ -25,34 +27,42 @@ public class FishSpot : MonoBehaviour
             StartCoroutine(moveObject());
         }
     }
+
     public void Fishing()
     {
-        PlayerControl.castLineAtFish = true;
-        PlayerControl.isFishing = true;
         StartCoroutine(fishCountdown(fishingTime));
     }
 
+
+
     private IEnumerator fishCountdown(float time)
     {
-        float currentTime = 0f;
-        while (PlayerControl.isFishing)
+        float t;
+        while (PlayerControl.castLineAtFish)
         {
             currentTime += Time.deltaTime;
-            if (currentTime > time)
+            t = Mathf.Clamp01(currentTime / time);
+            if (PlayerControl.isFishing)
             {
-                break;
+                fishingGauge.transform.localScale = Vector3.Lerp(fishingGauge.transform.localScale, new Vector3(1, 1, 1), t);
+                if (fishingGauge.transform.localScale == new Vector3(1, 1, 1))
+                {
+                    onFishBite.Invoke();
+                    PlayerControl.castLineAtFish = false;
+                    currentTime = 0f;
+                }
             }
-
+            else
+            {
+                fishingGauge.transform.localScale = Vector3.Lerp(fishingGauge.transform.localScale, new Vector3(1, 0, 1), 0.025f);
+                if (fishingGauge.transform.localScale == new Vector3(1, 0, 1))
+                {
+                    PlayerControl.castLineAtFish = false;
+                    currentTime = 0f;
+                    Debug.Log("Fish Escaped");
+                }
+            }
             yield return null;
-        }
-
-        if (PlayerControl.isFishing) //Player track the fish for target time
-        {
-            onFishBite.Invoke();
-        }
-        else //Player failed to track fish
-        {
-            Debug.Log("Fish escaped");
         }
     }
 

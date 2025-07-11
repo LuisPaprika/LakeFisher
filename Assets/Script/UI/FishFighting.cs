@@ -19,7 +19,7 @@ public class FishFighting : MonoBehaviour
     void Awake()
     {
         DayController.onTimerEnd += exitFishFight;
-        DayController.onStartTimer += enableFishFight;
+        DayController.onStartFightTimer += enableFishFight;
         dayControllerScript = dayController.GetComponent<DayController>();
     }
 

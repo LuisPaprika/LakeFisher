@@ -23,7 +23,7 @@ public class PlayerControl : MonoBehaviour
 
     [Header("Fishing")]
     public static bool isFishing = false;
-    public static bool castLineAtFish = false;
+    public static bool castLineAtFish;
 
     
     private Vector3 playerVelocity;

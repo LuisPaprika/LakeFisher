@@ -6,7 +6,7 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] GameObject UI;
     public void goToScene(string sceneName)
     {
-        UI.SetActive(true);
+        UI.SetActive(!UI.activeSelf);
         SceneManager.LoadScene(sceneName);
     }
 }
