@@ -47,15 +47,13 @@ public class DayController : MonoBehaviour
         };
 
         maxScale = timer.transform.localScale;
-
     }
 
 
     public void addFish(int amount)
     {
         fishCount += amount;
-        fishCounter.text = fishCount.ToString();
-        Debug.Log("Fish Count:" + fishCount);
+        fishCounter.text = "Fish:" + fishCount.ToString();
         if (fishCount >= goal[dayCount])
         {
             doneFishing = true;
@@ -72,9 +70,10 @@ public class DayController : MonoBehaviour
         if (doneFishing)
         {
             dayCount++;
-            dayCounter.text = dayCount.ToString();
+            dayCounter.text = "Day:" + dayCount.ToString();
             fishCount = 0;
-            fishCounter.text = fishCount.ToString();
+            fishCounter.text = "Fish:" + fishCount.ToString();
+            doneFishing = false;
         }
         else
         {
@@ -84,7 +83,7 @@ public class DayController : MonoBehaviour
 
     public void createFishSpot()
     {
-        if (fishSpotGameObj != null) 
+        if (fishSpotGameObj != null)
         {
             Destroy(fishSpotGameObj);
             fishSpotGameObj = null;

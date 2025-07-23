@@ -2,11 +2,11 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 public class InteractPrompt : MonoBehaviour
 {
     private string InteractKey;
+    private bool lookingAtObj = false;
     void Awake()
     {
         InteractableBase.OnHover += ShowPrompt;
@@ -14,11 +14,17 @@ public class InteractPrompt : MonoBehaviour
 
     void Update()
     {
-        ResetPrompt();
+        if (!lookingAtObj)
+        {
+            ResetPrompt();
+        }
+        lookingAtObj = false;
+        
     }
 
     private void ShowPrompt(string text)
     {
+        lookingAtObj = true;
         InputAction InteractAction = PlayerControl.inputActions.FindAction("Interact");
         
         InteractKey = InteractAction.bindings.FirstOrDefault().path;

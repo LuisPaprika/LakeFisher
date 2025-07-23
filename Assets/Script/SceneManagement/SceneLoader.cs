@@ -1,12 +1,19 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    [SerializeField] GameObject UI;
+    [SerializeField] private Animator animator;
     public void goToScene(string sceneName)
     {
-        UI.SetActive(!UI.activeSelf);
+        StartCoroutine(loadScene(sceneName));
+    }
+
+    private IEnumerator loadScene(string sceneName)
+    {
+        animator.SetTrigger("FadeIn");
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(sceneName);
     }
 }
