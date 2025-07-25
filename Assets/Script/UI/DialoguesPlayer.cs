@@ -1,10 +1,10 @@
-using System.Runtime.CompilerServices;
+using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class DialoguesPlayer : MonoBehaviour
 {
+    private string actionMapBefore;
     //Attach this to UI (Canvas)
     [SerializeField] GameObject textBoxBG;
     private TMP_Text textBox;
@@ -12,12 +12,18 @@ public class DialoguesPlayer : MonoBehaviour
     private DialogueSO currentDialogue;
     void Awake()
     {
+        DayController.onFishCaught += StartDialogue;
         PersonInteract.OnTalk += StartDialogue;
+        DayController.onNeedToFish += StartDialogue;
+        DayController.onEnoughFish += StartDialogue;
+        DayController.onFishEscaped += StartDialogue;
+        FishFighting.onExitFishFight += StartDialogue;
     }
 
-    private void StartDialogue(DialogueSO dialogue, Vector3 vector3)
+    private void StartDialogue(DialogueSO dialogue, string actionMapToReturnTo)
     {
         PlayerControl.SetActionMapByName("Conversation");
+        actionMapBefore = actionMapToReturnTo;
         currentDialogue = dialogue;
         dialogueIndex = 0;
 
@@ -48,6 +54,6 @@ public class DialoguesPlayer : MonoBehaviour
         PlayerControl.inputActions.Conversation.NextDialouge.performed -= NextDialogue;
 
         textBoxBG.SetActive(false); //Hide text box and BG
-        PlayerControl.SetActionMapByName("Player");
+        PlayerControl.SetActionMapByName(actionMapBefore);
     }
 }

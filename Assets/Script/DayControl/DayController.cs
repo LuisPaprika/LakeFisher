@@ -10,6 +10,14 @@ public class DayController : MonoBehaviour
     [SerializeField] GameObject timer;
     [SerializeField] TMP_Text dayCounter;
     [SerializeField] TMP_Text fishCounter;
+    [SerializeField] private DialogueSO needFishDialogue;
+    [SerializeField] private DialogueSO fishCaughtDialogue;
+    [SerializeField] private DialogueSO enoughFishDialogue;
+    [SerializeField] private DialogueSO fishEscapedDialogue;
+    public static event Action onNewDayStart;
+    public static event Action<DialogueSO, string> onFishEscaped;
+    public static event Action<DialogueSO, string> onFishCaught;
+    public static event Action<DialogueSO, string> onEnoughFish;
     private float time;
     private List<Vector3> spawnPositionsList = new List<Vector3>()
     {
@@ -21,6 +29,7 @@ public class DayController : MonoBehaviour
     public static DayController Instance;
     public static event Action onTimerEnd;
     public static event Action<int> onStartFightTimer;
+    public static event Action<DialogueSO, string> onNeedToFish;
     private Dictionary<int, int> goal; //Key is dayCount value is fishGoal
     private int dayCount = 0; //dayCount 0 is tutorial
     private int fishCount = 0;
@@ -54,9 +63,11 @@ public class DayController : MonoBehaviour
     {
         fishCount += amount;
         fishCounter.text = "Fish:" + fishCount.ToString();
+        onFishCaught?.Invoke(fishCaughtDialogue, "Fishing");
         if (fishCount >= goal[dayCount])
         {
             doneFishing = true;
+            onEnoughFish.Invoke(enoughFishDialogue, "Fishing");
         }
 
         if (jumpScarable())
@@ -74,10 +85,12 @@ public class DayController : MonoBehaviour
             fishCount = 0;
             fishCounter.text = "Fish:" + fishCount.ToString();
             doneFishing = false;
+
+            onNewDayStart.Invoke();
         }
         else
         {
-            Debug.Log("I still need to fish.");
+            onNeedToFish.Invoke(needFishDialogue, "Player");
         }
     }
 
@@ -172,7 +185,7 @@ public class DayController : MonoBehaviour
         }
     }
 
-    private void resetTimer()
+    private void resetTimer(DialogueSO temp, string temp2)
     {
         time = 0;
     }
@@ -206,5 +219,6 @@ public class DayController : MonoBehaviour
             yield return null;
         }
         onTimerEnd.Invoke();
+        onFishEscaped.Invoke(fishEscapedDialogue, "Fishing");
     }
 }

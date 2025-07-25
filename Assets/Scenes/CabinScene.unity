@@ -1914,14 +1914,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411761836}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0007873048, y: -0.70486826, z: -0.00079229736, w: 0.7093375}
-  m_LocalPosition: {x: 196.21, y: 11.61, z: 43.47}
+  m_LocalRotation: {x: 0.00045593773, y: -0.4081983, z: -0.0010196598, w: 0.9128926}
+  m_LocalPosition: {x: 207.28, y: 11.61, z: 43.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 330585546}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -89.638, z: -0.128}
+  m_LocalEulerAnglesHint: {x: 0, y: -48.183, z: -0.128}
 --- !u!114 &411761839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3256,6 +3256,10 @@ MonoBehaviour:
   timer: {fileID: 582404125}
   dayCounter: {fileID: 984265170}
   fishCounter: {fileID: 969209904}
+  needFishDialogue: {fileID: 11400000, guid: 86993c3c6ca306f44894e8bac43f0a8c, type: 2}
+  fishCaughtDialogue: {fileID: 11400000, guid: 5d75c286303496e4c9d5409bc5c77066, type: 2}
+  enoughFishDialogue: {fileID: 11400000, guid: d7ac0eb6497f5d1489b9b2a7ecbea08b, type: 2}
+  fishEscapedDialogue: {fileID: 11400000, guid: 054f854b16c112f49aa91ee719c39ef4, type: 2}
 --- !u!4 &991393075
 Transform:
   m_ObjectHideFlags: 0
@@ -3601,6 +3605,7 @@ MonoBehaviour:
   answerButtons: {fileID: 804628210}
   inputButtons: {fileID: 884403051}
   minigameUI: {fileID: 482407196}
+  fishEscapedDialogue: {fileID: 11400000, guid: 054f854b16c112f49aa91ee719c39ef4, type: 2}
 --- !u!114 &1582427996
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class FishSpot : MonoBehaviour
 {
     [SerializeField] GameObject fishingGauge;
+    private GameObject defaultGauge;
     public float fishingTime;
     public float moveSpeed;
     public static event Action onFishBite;
@@ -15,6 +16,8 @@ public class FishSpot : MonoBehaviour
 
     void Awake()
     {
+        defaultGauge = fishingGauge;
+        DayController.onTimerEnd += resetFishGauge;
         finishedMoving = true;
         goForward = UnityEngine.Random.Range(0, 2) == 0 ? false : true;
     }
@@ -59,11 +62,20 @@ public class FishSpot : MonoBehaviour
                 {
                     PlayerControl.castLineAtFish = false;
                     currentTime = 0f;
-                    Debug.Log("Fish Escaped");
                 }
             }
             yield return null;
         }
+    }
+
+    private void resetFishGauge()
+    {
+        fishingGauge.transform.localScale = defaultGauge.transform.localScale;
+    }
+
+    void OnDestroy()
+    {
+        DayController.onTimerEnd -= resetFishGauge;
     }
 
     private IEnumerator moveObject()

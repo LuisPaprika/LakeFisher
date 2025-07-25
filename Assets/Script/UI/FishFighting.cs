@@ -12,7 +12,8 @@ public class FishFighting : MonoBehaviour
     [SerializeField] GameObject answerButtons;
     [SerializeField] GameObject inputButtons;
     [SerializeField] GameObject minigameUI;
-    public static event Action onExitFishFight;
+    [SerializeField] private DialogueSO fishEscapedDialogue;
+    public static event Action<DialogueSO, string> onExitFishFight;
     private List<Arrow.ArrowType> correctButtonsList = new List<Arrow.ArrowType>();
     private int index;
     private DayController dayControllerScript;
@@ -112,11 +113,11 @@ public class FishFighting : MonoBehaviour
     private void checkButton(Arrow.ArrowType button)
     {
         index++;
-        if (button != correctButtonsList[index])
+        if (button != correctButtonsList[index]) //pressed wrong button
         {
-            Debug.Log("Wrong Input");
             exitFishFight();
             dayControllerScript.createFishSpot();
+            onExitFishFight.Invoke(fishEscapedDialogue, "Fishing");
         }
         else if (index == correctButtonsList.Count - 1) //finish fish fighting
         {
@@ -131,7 +132,5 @@ public class FishFighting : MonoBehaviour
         minigameUI.SetActive(false);
         clearObjectChildren(inputButtons.transform);
         clearObjectChildren(answerButtons.transform);
-        PlayerControl.SetActionMapByName("Fishing");
-        onExitFishFight.Invoke();
     }
 }

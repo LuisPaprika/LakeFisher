@@ -19,14 +19,14 @@ public class InteractPrompt : MonoBehaviour
             ResetPrompt();
         }
         lookingAtObj = false;
-        
+
     }
 
     private void ShowPrompt(string text)
     {
         lookingAtObj = true;
         InputAction InteractAction = PlayerControl.inputActions.FindAction("Interact");
-        
+
         InteractKey = InteractAction.bindings.FirstOrDefault().path;
         InteractKey = InteractKey.Substring(InteractKey.IndexOf("/") + 1);
 
@@ -38,5 +38,10 @@ public class InteractPrompt : MonoBehaviour
     {
         TMP_Text textUI = gameObject.GetComponent<TMP_Text>();
         textUI.text = "";
+    }
+
+    void OnDestroy()
+    {
+        InteractableBase.OnHover -= ShowPrompt;
     }
 }

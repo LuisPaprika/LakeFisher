@@ -12,6 +12,7 @@ public class ScreenFade : MonoBehaviour
         SceneInit.onSceneLoad += fadeIn;
         BoatInteract.onBoatInteract += loadScene;
         FishSpotSpawner.onSceneLoad += fadeIn;
+        DayController.onNewDayStart += startFade;
     }
 
     private void fadeIn()
@@ -54,5 +55,6 @@ public class ScreenFade : MonoBehaviour
         BoatInteract.onBoatInteract -= loadScene;
         FishSpotSpawner.onSceneLoad -= fadeIn;
         SceneInit.onSceneLoad -= fadeIn;
+        DayController.onNewDayStart -= startFade;
     }
 }
