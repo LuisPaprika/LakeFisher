@@ -16,7 +16,6 @@ public class DialoguesPlayer : MonoBehaviour
         PersonInteract.OnTalk += StartDialogue;
         DayController.onNeedToFish += StartDialogue;
         DayController.onEnoughFish += StartDialogue;
-        DayController.onFishEscaped += StartDialogue;
         FishFighting.onExitFishFight += StartDialogue;
     }
 

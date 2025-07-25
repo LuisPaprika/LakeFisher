@@ -13,9 +13,7 @@ public class DayController : MonoBehaviour
     [SerializeField] private DialogueSO needFishDialogue;
     [SerializeField] private DialogueSO fishCaughtDialogue;
     [SerializeField] private DialogueSO enoughFishDialogue;
-    [SerializeField] private DialogueSO fishEscapedDialogue;
     public static event Action onNewDayStart;
-    public static event Action<DialogueSO, string> onFishEscaped;
     public static event Action<DialogueSO, string> onFishCaught;
     public static event Action<DialogueSO, string> onEnoughFish;
     private float time;
@@ -63,7 +61,8 @@ public class DayController : MonoBehaviour
     {
         fishCount += amount;
         fishCounter.text = "Fish:" + fishCount.ToString();
-        onFishCaught?.Invoke(fishCaughtDialogue, "Fishing");
+        onFishCaught.Invoke(fishCaughtDialogue, "Fishing");
+        resetTimer(fishCaughtDialogue, "");
         if (fishCount >= goal[dayCount])
         {
             doneFishing = true;
@@ -219,6 +218,5 @@ public class DayController : MonoBehaviour
             yield return null;
         }
         onTimerEnd.Invoke();
-        onFishEscaped.Invoke(fishEscapedDialogue, "Fishing");
     }
 }
