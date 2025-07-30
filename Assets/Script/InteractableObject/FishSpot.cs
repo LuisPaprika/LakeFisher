@@ -5,6 +5,7 @@ using UnityEngine;
 public class FishSpot : MonoBehaviour
 {
     [SerializeField] GameObject fishingGauge;
+    [SerializeField] private AudioSource throwBaitSFX;
     private GameObject defaultGauge;
     public float fishingTime;
     public float moveSpeed;
@@ -33,6 +34,7 @@ public class FishSpot : MonoBehaviour
 
     public void Fishing()
     {
+        throwBaitSFX.Play();
         StartCoroutine(fishCountdown(fishingTime));
     }
 
