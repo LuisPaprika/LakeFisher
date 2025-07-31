@@ -8,6 +8,8 @@ public class PlayerControl : MonoBehaviour
     [Header("Components")]
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Transform playerCameraTransform;
+    [SerializeField] private AudioSource footStepSFX;
+    [SerializeField] private AudioClip footStepSFXClip;
     public static Transform PlayerCamera;
 
     [Header("Player Movement")]
@@ -130,6 +132,10 @@ public class PlayerControl : MonoBehaviour
 
     private void HandleMovement()
     {
+        if (moveInput != Vector2.zero && !footStepSFX.isPlaying)
+        {
+            footStepSFX.PlayOneShot(footStepSFXClip);
+        }
         Vector3 moveDirection = transform.right * moveInput.x + transform.forward * moveInput.y;
         characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
     }
