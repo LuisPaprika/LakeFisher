@@ -23,6 +23,8 @@ public class Intro : MonoBehaviour
         if (index == introDialogue.Dialogues.Count)
         {
             SceneManager.LoadScene("CabinScene");
+            inputActions.Conversation.Disable();
+            index = 0;
             return;
         }
         textBox.text = introDialogue.Dialogues[index];

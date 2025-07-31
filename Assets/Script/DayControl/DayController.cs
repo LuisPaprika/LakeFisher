@@ -229,6 +229,14 @@ public class DayController : MonoBehaviour
         }
     }
 
+    void OnDestroy()
+    {
+        FishSpotSpawner.onSceneLoad -= createFishSpot;
+        FishFighting.onExitFishFight -= resetTimer;
+        FishSpot.onFishBite -= setTime;
+        BedInteract.onSleep -= goToNextDay;
+    }
+
     private IEnumerator IncreasingTimer(GameObject timer)
     {
         float startTime = 0f;

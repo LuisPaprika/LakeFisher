@@ -132,4 +132,10 @@ public class FishFighting : MonoBehaviour
         clearObjectChildren(inputButtons.transform);
         clearObjectChildren(answerButtons.transform);
     }
+
+    void OnDestroy()
+    {
+        DayController.onTimerEnd -= exitFishFight;
+        DayController.onStartFightTimer -= enableFishFight;
+    }
 }

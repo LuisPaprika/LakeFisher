@@ -55,4 +55,13 @@ public class DialoguesPlayer : MonoBehaviour
         textBoxBG.SetActive(false); //Hide text box and BG
         PlayerControl.SetActionMapByName(actionMapBefore);
     }
+
+    void OnDestroy()
+    {
+        DayController.onFishCaught -= StartDialogue;
+        PersonInteract.OnTalk -= StartDialogue;
+        DayController.onNeedToFish -= StartDialogue;
+        DayController.onEnoughFish -= StartDialogue;
+        FishFighting.onExitFishFight -= StartDialogue;
+    }
 }
