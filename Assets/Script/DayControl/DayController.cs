@@ -14,6 +14,7 @@ public class DayController : MonoBehaviour
     [SerializeField] private DialogueSO fishCaughtDialogue;
     [SerializeField] private DialogueSO enoughFishDialogue;
     [SerializeField] private AudioSource clotheSFX;
+    [SerializeField] private AudioSource fishCaughtSFX;
     public static event Action onNewDayStart;
     public static event Action<DialogueSO, string> onFishCaught;
     public static event Action<DialogueSO, string> onEnoughFish;
@@ -60,6 +61,7 @@ public class DayController : MonoBehaviour
 
     public void addFish(int amount)
     {
+        fishCaughtSFX.Play();
         fishCount += amount;
         fishCounter.text = "Fish:" + fishCount.ToString();
         onFishCaught.Invoke(fishCaughtDialogue, "Fishing");
