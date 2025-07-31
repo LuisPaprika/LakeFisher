@@ -62,6 +62,14 @@ public class DayController : MonoBehaviour
         maxScale = timer.transform.localScale;
     }
 
+    // void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.Space))
+    //     {
+    //         onCreateJumpScare?.Invoke();
+    //     }
+    // }
+
 
     public void addFish(int amount)
     {
