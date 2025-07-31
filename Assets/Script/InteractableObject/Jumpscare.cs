@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Jumpscare : MonoBehaviour
@@ -21,12 +22,19 @@ public class Jumpscare : MonoBehaviour
         {
             jumpscareSource.Play();
             ghostAnimator.SetTrigger("Jumpscare");
+            StartCoroutine(endingGame());
         }
     }
 
     void OnDestroy()
     {
         DayController.onCreateJumpScare -= enableJumpscare;
+    }
+
+    private IEnumerator endingGame()
+    {
+        yield return new WaitForSeconds(1f);
+        Application.Quit();
     }
 
 }
