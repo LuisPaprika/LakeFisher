@@ -2945,8 +2945,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7.307602, y: 1, z: 4.1438904}
-  m_Center: {x: 1.3143692, y: 0, z: 1.5719452}
+  m_Size: {x: 7.307602, y: 1, z: 2.5419998}
+  m_Center: {x: 1.3143692, y: 0, z: 0.7709999}
 --- !u!4 &931315868
 Transform:
   m_ObjectHideFlags: 0
@@ -5692,6 +5692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShownPrompt: Sleep
+  bedSFX: {fileID: 919132148467724918}
 --- !u!82 &919132148467724918
 AudioSource:
   m_ObjectHideFlags: 0

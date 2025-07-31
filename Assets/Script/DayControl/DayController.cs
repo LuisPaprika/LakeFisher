@@ -31,6 +31,7 @@ public class DayController : MonoBehaviour
     };
     public static DayController Instance;
     public static event Action onTimerEnd;
+    public static event Action onSleep;
     public static event Action<int> onStartFightTimer;
     public static event Action<DialogueSO, string> onNeedToFish;
     private Dictionary<int, int> goal; //Key is dayCount value is fishGoal
@@ -101,7 +102,7 @@ public class DayController : MonoBehaviour
             fishCounter.text = "Fish:" + fishCount.ToString();
             doneFishing = false;
 
-            clotheSFX.Play();
+            onSleep.Invoke();
             onNewDayStart.Invoke();
             if (dayCount == 4)
             {
