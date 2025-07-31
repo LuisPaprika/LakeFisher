@@ -15,6 +15,9 @@ public class DayController : MonoBehaviour
     [SerializeField] private DialogueSO enoughFishDialogue;
     [SerializeField] private AudioSource clotheSFX;
     [SerializeField] private AudioSource fishCaughtSFX;
+    [SerializeField] private AudioSource jumpScareSource;
+    [SerializeField] private AudioClip[] jumpSoundClip;
+    public static event Action onCreateJumpScare;
     public static event Action onNewDayStart;
     public static event Action<DialogueSO, string> onFishCaught;
     public static event Action<DialogueSO, string> onEnoughFish;
@@ -36,6 +39,7 @@ public class DayController : MonoBehaviour
     private GameObject fishSpotGameObj;
     private bool doneFishing = false;
     private Vector3 maxScale;
+    private int i = 0;
 
 
     void Awake()
@@ -72,9 +76,10 @@ public class DayController : MonoBehaviour
             onEnoughFish.Invoke(enoughFishDialogue, "Fishing");
         }
 
-        if (jumpScarable())
+        if (jumpScarable()) //Wait around 2 sec before jump
         {
             Debug.Log("Jump Scared");
+            StartCoroutine(jumpSound());
         }
     }
 
@@ -90,6 +95,11 @@ public class DayController : MonoBehaviour
 
             clotheSFX.Play();
             onNewDayStart.Invoke();
+            if (dayCount == 4)
+            {
+                onCreateJumpScare.Invoke();
+            }
+            
         }
         else
         {
@@ -105,13 +115,12 @@ public class DayController : MonoBehaviour
             fishSpotGameObj = null;
         }
 
+
+
         if (!doneFishing) //Creating fishSpot and setting its values
         {
-            Vector3 spawnPostion = spawnPositionsList[UnityEngine.Random.Range(0, 4)];
-            fishSpotGameObj = Instantiate(fishSpotPrefab, spawnPostion, Quaternion.identity);
-            FishSpot fishSpotScript = fishSpotGameObj.GetComponent<FishSpot>();
-            fishSpotScript.fishingTime = getFishingTimeFromDay();
-            fishSpotScript.moveSpeed = 1f;
+            create();
+            //StartCoroutine(waitToSpawnFish(UnityEngine.Random.Range(5, 8)));
         }
 
     }
@@ -222,5 +231,33 @@ public class DayController : MonoBehaviour
             yield return null;
         }
         onTimerEnd.Invoke();
+    }
+
+    private IEnumerator waitToSpawnFish(int sec)
+    {
+        yield return new WaitForSeconds(sec);
+        create();
+    }
+
+    private void create()
+    {
+        Vector3 spawnPostion = spawnPositionsList[UnityEngine.Random.Range(0, 4)];
+        fishSpotGameObj = Instantiate(fishSpotPrefab, spawnPostion, Quaternion.identity);
+        FishSpot fishSpotScript = fishSpotGameObj.GetComponent<FishSpot>();
+        fishSpotScript.fishingTime = getFishingTimeFromDay();
+        fishSpotScript.moveSpeed = 1f;
+    }
+
+    private IEnumerator jumpSound()
+    {
+        yield return new WaitForSeconds(UnityEngine.Random.Range(1f, 3f));
+        jumpScareSource.clip = jumpSoundClip[i];
+        jumpScareSource.Play();
+        i++;
+
+        if (i >= jumpSoundClip.Length)
+        {
+            i = 0;
+        }
     }
 }

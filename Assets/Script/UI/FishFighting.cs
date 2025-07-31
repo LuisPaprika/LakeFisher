@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -90,7 +89,7 @@ public class FishFighting : MonoBehaviour
         }
         PlayerControl.SetActionMapByName("FishFighting");
         minigameUI.SetActive(true);
-        
+
     }
 
     private void displayButtonAtGameObject(Arrow.ArrowType button, GameObject parent)
