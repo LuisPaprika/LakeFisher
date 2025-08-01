@@ -40,6 +40,7 @@ public class ScreenFade : MonoBehaviour
     {
         fadeAnimator.SetTrigger("FadeIn");
         yield return new WaitForSeconds(3f);
+        PlayerControl.inputActions.Player.Enable();
         fadeAnimator.SetTrigger("FadeOut");
     }
 

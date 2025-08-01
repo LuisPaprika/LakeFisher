@@ -1133,8 +1133,30 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""aa3aefa2-fa08-40d3-a6e2-384321dd22fc"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""31f4e244-4f1f-49c0-b6fb-85c8b54310a3"",
                     ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac22abfe-a2ce-4fd0-a38d-c58f32b44b98"",
+                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1155,8 +1177,30 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""909dbb68-e3a5-42bf-b7e5-2c4a0114de6c"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""dc0720e3-68fc-41ba-abbe-c52402266734"",
                     ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d2747175-5c4c-4fff-9333-a21b25eaf8cd"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1270,11 +1314,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
 
     ~@InputSystem_Actions()
     {
-        UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Player.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_Conversation.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Conversation.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_Fishing.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Fishing.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_FishFighting.enabled, "This will cause a leak and performance issues, InputSystem_Actions.FishFighting.Disable() has not been called.");
+        // UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Player.Disable() has not been called.");
+        // UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
+        // UnityEngine.Debug.Assert(!m_Conversation.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Conversation.Disable() has not been called.");
+        // UnityEngine.Debug.Assert(!m_Fishing.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Fishing.Disable() has not been called.");
+        // UnityEngine.Debug.Assert(!m_FishFighting.enabled, "This will cause a leak and performance issues, InputSystem_Actions.FishFighting.Disable() has not been called.");
     }
 
     public void Dispose()

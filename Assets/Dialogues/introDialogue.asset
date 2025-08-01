@@ -15,6 +15,18 @@ MonoBehaviour:
   Dialogues:
   - I recently got a new job.
   - I need to catch a fish in the lake.
-  - (LMB on to the fish and follow it)
-  - (The minigame window will be shown)
-  - (Press the corresspond list of button to catch the fish)
+  - It looks like the fish will mostly come out at night
+  - I wonder what kind of fish is this?
+  - Tutorial
+  - (Go to boat to go fishing)
+  - (Try looking around boat for fishing spot)
+  - (Click at it and follow it)
+  - (The bar will increasing)
+  - (When it full, the minigame will start)
+  - (Press Arrows or WASD)
+  - (The button needs to match the shown buttons)
+  - (Then you will get a fish)
+  - (After getting enough fish)
+  - (Go back to the cabin)
+  - (Sleep to start next day)
+  - I need to fish for 4 days

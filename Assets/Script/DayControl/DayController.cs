@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 public class DayController : MonoBehaviour
 {
@@ -54,29 +55,20 @@ public class DayController : MonoBehaviour
         goal = new Dictionary<int, int>
         {
             { 0, 3 },
-            { 1, 7 },
-            { 2, 7 },
-            { 3, 10 },
+            { 1, 5 },
+            { 2, 6 },
+            { 3, 7 },
             { 4, 13 }
         };
 
         maxScale = timer.transform.localScale;
     }
 
-    // void Update()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.Space))
-    //     {
-    //         onCreateJumpScare?.Invoke();
-    //     }
-    // }
-
-
     public void addFish(int amount)
     {
         fishCaughtSFX.Play();
         fishCount += amount;
-        fishCounter.text = "Fish:" + fishCount.ToString();
+        fishCounter.text = "Fish : " + fishCount.ToString() + " / " + goal[dayCount];
         onFishCaught.Invoke(fishCaughtDialogue, "Fishing");
         resetTimer(fishCaughtDialogue, "");
         if (fishCount >= goal[dayCount])
@@ -97,14 +89,15 @@ public class DayController : MonoBehaviour
         if (doneFishing)
         {
             dayCount++;
-            dayCounter.text = "Day:" + dayCount.ToString();
+            dayCounter.text = "Day : " + dayCount.ToString();
             fishCount = 0;
-            fishCounter.text = "Fish:" + fishCount.ToString();
+            fishCounter.text = "Fish : " + fishCount.ToString() + " / " + goal[dayCount];
             doneFishing = false;
 
+            PlayerControl.inputActions.Player.Disable();
             onSleep.Invoke();
             onNewDayStart.Invoke();
-            if (dayCount == 4)
+            if (dayCount == 3)
             {
                 onCreateJumpScare.Invoke();
             }
@@ -145,13 +138,13 @@ public class DayController : MonoBehaviour
                 }
                 break;
             case 2:
-                if (fishCount == 5)
+                if (fishCount == 4)
                 {
                     return true;
                 }
                 break;
             case 3:
-                if (fishCount == 7)
+                if (fishCount == 6)
                 {
                     return true;
                 }
@@ -180,20 +173,20 @@ public class DayController : MonoBehaviour
                 StartCoroutine(IncreasingTimer(timer));
                 break;
             case 1:
-                time = 8;
-                actionCounts = 6;
+                time = 10;
+                actionCounts = 5;
                 onStartFightTimer.Invoke(actionCounts);
                 StartCoroutine(IncreasingTimer(timer));
                 break;
             case 2:
-                time = 7;
-                actionCounts = 8;
+                time = 10;
+                actionCounts = 6;
                 onStartFightTimer.Invoke(actionCounts);
                 StartCoroutine(IncreasingTimer(timer));
                 break;
             case 3:
-                time = 6;
-                actionCounts = 10;
+                time = 10;
+                actionCounts = 8;
                 onStartFightTimer.Invoke(actionCounts);
                 StartCoroutine(IncreasingTimer(timer));
                 break;
@@ -217,11 +210,11 @@ public class DayController : MonoBehaviour
             case 0:
                 return 50f;
             case 1:
-                return 8f;
+                return 45f;
             case 2:
-                return 10f;
+                return 40f;
             case 3:
-                return 13f;
+                return 35f;
             case 4:
                 return 18f;
             default:
