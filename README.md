@@ -20,6 +20,12 @@ Aim at glowing spots in the water and follow them to successfully catch fish.
 
 After catching a fish, a minigame is triggered where the player must input the correct button sequence to complete the catch.
 
+▶️ How to Run
+
+- Download build from Releases
+
+- Run .exe
+
 
 📸 Screenshots
 
