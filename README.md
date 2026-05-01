@@ -27,6 +27,12 @@ After catching a fish, a minigame is triggered where the player must input the c
 🚀 **Play in browser (no download required):**  
 https://luispaprika.itch.io/lake-fisher
 
+or
+
+- Download build from Releases
+
+- Run .exe
+
 ---
 
 ## 📸 Screenshots
