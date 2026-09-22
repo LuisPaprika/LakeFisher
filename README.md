@@ -1,10 +1,10 @@
-# 🎮 Lake Fisher
+# Lake Fisher
 
 A horror game about a night-shift fisherman working on a secluded lake in the woods, where he experiences a series of disturbing and mysterious events.
 
 ---
 
-## 🎮 Controls
+## Controls
 
 - W / A / S / D – Move  
 - E – Interact  
@@ -12,7 +12,7 @@ A horror game about a night-shift fisherman working on a secluded lake in the wo
 
 ---
 
-## 🧩 Gameplay
+## Gameplay
 
 ### Fishing
 Aim at glowing spots in the water and follow them to successfully catch fish.
@@ -22,9 +22,9 @@ After catching a fish, a minigame is triggered where the player must input the c
 
 ---
 
-## 🎮 Play the Game
+## Play the Game
 
-🚀 **Play in browser (no download required):**  
+**Play in browser (no download required):**  
 https://luispaprika.itch.io/lake-fisher
 
 or
@@ -35,7 +35,7 @@ or
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/debdb636-bef3-4c2f-b41f-444858d10462" />
 
